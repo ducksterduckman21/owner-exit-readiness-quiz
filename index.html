@@ -634,9 +634,9 @@
 
   <!-- ── Intro Screen ── -->
   <div id="intro-screen">
-    <div class="time-badge">5 minutes · 19 questions</div>
+    <div class="time-badge">5 minutes · 20 questions</div>
     <h1 class="hero-title">Are You Ready<br>to Exit Your Business?</h1>
-    <p class="hero-sub">A 19-question assessment for business owners at $3M–$50M in revenue who are thinking seriously about what's next.</p>
+    <p class="hero-sub">A 20-question assessment for business owners at $3M–$50M in revenue who are thinking seriously about what's next.</p>
 
     <div class="pillars-preview">
       <div class="pillar-card">
@@ -761,6 +761,17 @@
         { label: "Stable and predictable", score: 4 },
         { label: "Roughly flat with some variation", score: 2 },
         { label: "Declining or unpredictable", score: 0 },
+      ]
+    },
+
+    {
+      pillar: 1, pillarName: "Financial Readiness",
+      text: "Do you know your EBITDA — the earnings number buyers use to value your business?",
+      options: [
+        { label: "Yes — I know our adjusted EBITDA and could walk a buyer through the normalization", score: 5 },
+        { label: "I know it roughly — within a meaningful range", score: 3 },
+        { label: "I've heard the term but couldn't give you a confident number", score: 1 },
+        { label: "Honestly, I have no idea what my EBITDA is", score: 0 },
       ]
     },
 
@@ -1042,28 +1053,28 @@
   }
 
   // ── Scoring ──
-  // Pillar 1: indices 0–2   (3 q × 5 = 15 max)
-  // Pillar 2: indices 3–12  (10 q × 5 = 50 max; buy-sell at 12 may be excluded for sole owner)
-  // Pillar 3: indices 13–18 (6 q × 5 = 30 max; no-partner at 14 may be excluded)
+  // Pillar 1: indices 0–3   (4 q × 5 = 20 max)
+  // Pillar 2: indices 4–13  (10 q × 5 = 50 max; buy-sell at 13 may be excluded for sole owner)
+  // Pillar 3: indices 14–19 (6 q × 5 = 30 max; no-partner at 15 may be excluded)
   // Weighted overall: P1 30% + P2 45% + P3 25%
   function computeResults() {
-    let p1raw = 0, p1max = 15;
+    let p1raw = 0, p1max = 20;
     let p2raw = 0, p2max = 50;
     let p3raw = 0, p3max = 30;
 
     // Pillar 1
-    for (let i = 0; i < 3; i++) { if (answers[i]) p1raw += answers[i].score; }
+    for (let i = 0; i < 4; i++) { if (answers[i]) p1raw += answers[i].score; }
 
-    // Pillar 2 (indices 3–12; buy-sell at 12 uses soleOwner flag)
-    for (let i = 3; i < 13; i++) {
+    // Pillar 2 (indices 4–13; buy-sell at 13 uses soleOwner flag)
+    for (let i = 4; i < 14; i++) {
       if (answers[i]) {
         if (answers[i].soleOwner) { p2max -= 5; }
         else { p2raw += answers[i].score; }
       }
     }
 
-    // Pillar 3 (indices 13–18; no-partner at 14 uses noPartner flag)
-    for (let i = 13; i < 19; i++) {
+    // Pillar 3 (indices 14–19; no-partner at 15 uses noPartner flag)
+    for (let i = 14; i < 20; i++) {
       if (answers[i]) {
         if (answers[i].noPartner) { p3max -= 5; }
         else { p3raw += answers[i].score; }
@@ -1077,8 +1088,8 @@
     // Weighted overall score: 30% financial, 45% business, 25% life planning
     const overall = Math.min(100, Math.round(p1pct * 0.30 + p2pct * 0.45 + p3pct * 0.25));
 
-    // Pillar 3 binary check — core psychological questions only (indices 13–17, not exit path)
-    const p3CoreQuestions = [13, 14, 15, 16, 17];
+    // Pillar 3 binary check — core psychological questions only (indices 14–18, not exit path)
+    const p3CoreQuestions = [14, 15, 16, 17, 18];
     const p3allZero = p3CoreQuestions.every(i => {
       if (!answers[i]) return true;
       if (answers[i].noPartner) return false;

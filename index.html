@@ -634,9 +634,9 @@
 
   <!-- ── Intro Screen ── -->
   <div id="intro-screen">
-    <div class="time-badge">5 minutes · 20 questions</div>
+    <div class="time-badge">5 minutes · 19 questions</div>
     <h1 class="hero-title">Are You Ready<br>to Exit Your Business?</h1>
-    <p class="hero-sub">A 20-question assessment for business owners at $3M–$50M in revenue who are thinking seriously about what's next.</p>
+    <p class="hero-sub">A 19-question assessment for business owners at $3M–$50M in revenue who are thinking seriously about what's next.</p>
 
     <div class="pillars-preview">
       <div class="pillar-card">
@@ -865,18 +865,6 @@
         { label: "Over 75% — it's most of what I have", score: 0 },
       ]
     },
-    {
-      pillar: 2, pillarName: "Business Composition & Transferable Value",
-      text: "If you have co-owners, do you have a funded buy-sell agreement in place — and has it been reviewed in the last three years?",
-      options: [
-        { label: "I'm the sole owner — not applicable", score: -2 }, // special: score 5, exclude from denominator
-        { label: "Yes — funded and reviewed within the last three years", score: 5 },
-        { label: "Yes, but it hasn't been reviewed in over three years", score: 3 },
-        { label: "In progress — being drafted or updated", score: 1 },
-        { label: "No — we have multiple owners and no buy-sell in place", score: 0 },
-      ]
-    },
-
     // Pillar 3 — Life Planning & Psychological Readiness
     {
       pillar: 3, pillarName: "Life Planning & Psychological Readiness",
@@ -995,9 +983,8 @@
     const q = questions[current];
     const opt = q.options[idx];
     const noPartner = opt.score === -1;
-    const soleOwner = opt.score === -2;
-    const score = (noPartner || soleOwner) ? 5 : opt.score;
-    answers[current] = { idx, score, noPartner, soleOwner };
+    const score = noPartner ? 5 : opt.score;
+    answers[current] = { idx, score, noPartner };
 
     document.querySelectorAll('.option-btn').forEach((b, i) => {
       b.classList.toggle('selected', i === idx);
@@ -1053,27 +1040,24 @@
 
   // ── Scoring ──
   // Pillar 1: indices 0–3   (4 q × 5 = 20 max)
-  // Pillar 2: indices 4–13  (10 q × 5 = 50 max; buy-sell at 13 may be excluded for sole owner)
-  // Pillar 3: indices 14–19 (6 q × 5 = 30 max; no-partner at 15 may be excluded)
+  // Pillar 2: indices 4–12  (9 q × 5 = 45 max)
+  // Pillar 3: indices 13–18 (6 q × 5 = 30 max; no-partner at 14 may be excluded)
   // Weighted overall: P1 30% + P2 45% + P3 25%
   function computeResults() {
     let p1raw = 0, p1max = 20;
-    let p2raw = 0, p2max = 50;
+    let p2raw = 0, p2max = 45;
     let p3raw = 0, p3max = 30;
 
     // Pillar 1
     for (let i = 0; i < 4; i++) { if (answers[i]) p1raw += answers[i].score; }
 
-    // Pillar 2 (indices 4–13; buy-sell at 13 uses soleOwner flag)
-    for (let i = 4; i < 14; i++) {
-      if (answers[i]) {
-        if (answers[i].soleOwner) { p2max -= 5; }
-        else { p2raw += answers[i].score; }
-      }
+    // Pillar 2 (indices 4–12)
+    for (let i = 4; i < 13; i++) {
+      if (answers[i]) p2raw += answers[i].score;
     }
 
-    // Pillar 3 (indices 14–19; no-partner at 15 uses noPartner flag)
-    for (let i = 14; i < 20; i++) {
+    // Pillar 3 (indices 13–18; no-partner at 14 uses noPartner flag)
+    for (let i = 13; i < 19; i++) {
       if (answers[i]) {
         if (answers[i].noPartner) { p3max -= 5; }
         else { p3raw += answers[i].score; }
@@ -1087,8 +1071,8 @@
     // Weighted overall score: 30% financial, 45% business, 25% life planning
     const overall = Math.min(100, Math.round(p1pct * 0.30 + p2pct * 0.45 + p3pct * 0.25));
 
-    // Pillar 3 binary check — core psychological questions only (indices 14–18, not exit path)
-    const p3CoreQuestions = [14, 15, 16, 17, 18];
+    // Pillar 3 binary check — core psychological questions only (indices 13–17, not exit path)
+    const p3CoreQuestions = [13, 14, 15, 16, 17];
     const p3allZero = p3CoreQuestions.every(i => {
       if (!answers[i]) return true;
       if (answers[i].noPartner) return false;
@@ -1120,7 +1104,6 @@
       "Convert informal client and vendor relationships into documented, transferable agreements.",
       "Reduce customer concentration: no single client should represent more than 20% of revenue, and audit vendor dependency just as carefully.",
       "Build out SOPs, an org chart, and a contracts binder — documentation is due-diligence gold.",
-      "If you have co-owners, make sure your buy-sell agreement is funded and has been reviewed in the last three years — a stale or missing agreement can complicate or kill a deal.",
     ],
     2: [ // Life Planning
       "Spend real time — not just a few minutes — on who you are outside of this business. A financial exit is also a personal transition.",

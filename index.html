@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exit Readiness Assessment | Two Palms Financial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal:   #2A424A;
+      --sage:   #8CA89F;
+      --white:  #FFFFFF;
+      --bg:     #FFFFFF;
+      --light:  #F3F7F5;
+      --border: #D4E0DC;
+      --text:   #1E2E33;
+      --muted:  #6B8A82;
+      --font:   'Ariana Pro', 'Cormorant Garamond', Georgia, serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 18px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 32px;
+      display: flex;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo-wrap img {
+      height: 44px;
+      width: auto;
+      display: block;
+    }
+
+    /* ── Main container ── */
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── Intro screen ── */
+    #intro-screen { text-align: center; }
+
+    .hero-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 600;
+      color: var(--teal);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto 36px;
+      font-weight: 300;
+    }
+
+    .time-badge {
+      display: inline-block;
+      background: var(--light);
+      border: 1px solid var(--border);
+      color: var(--teal);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 36px;
+    }
+
+    .pillars-preview {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 44px;
+      text-align: left;
+    }
+
+    .pillar-card {
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--sage);
+      padding: 20px 18px;
+      border-radius: 4px;
+    }
+
+    .pillar-card .num {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 6px;
+    }
+
+    .pillar-card .name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--teal);
+      line-height: 1.3;
+    }
+
+    /* ── Buttons ── */
+    .btn-primary {
+      display: inline-block;
+      background: var(--teal);
+      color: var(--white);
+      font-family: var(--font);
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 15px 40px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover { background: #1e3038; transform: translateY(-1px); }
+
+    .btn-secondary {
+      display: inline-block;
+      background: transparent;
+      color: var(--teal);
+      font-family: var(--font);
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 14px 36px;
+      border: 1.5px solid var(--teal);
+      border-radius: 3px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-secondary:hover { background: var(--light); transform: translateY(-1px); }
+
+    /* ── Progress bar ── */
+    #progress-wrap {
+      display: none;
+      margin-bottom: 40px;
+    }
+
+    .progress-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .progress-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      flex: 1;
+      text-align: center;
+    }
+
+    .progress-label.active { color: var(--teal); font-weight: 600; }
+    .progress-label.done   { color: var(--sage); }
+
+    .progress-bar-bg {
+      height: 5px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--sage);
+      border-radius: 3px;
+      transition: width 0.4s ease;
+    }
+
+    .progress-count {
+      text-align: right;
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    /* ── Question card ── */
+    #question-screen { display: none; }
+
+    .pillar-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 10px;
+    }
+
+    .question-text {
+      font-size: clamp(1.2rem, 3vw, 1.55rem);
+      font-weight: 500;
+      color: var(--teal);
+      line-height: 1.35;
+      margin-bottom: 32px;
+    }
+
+    .options-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+
+    .option-btn {
+      width: 100%;
+      text-align: left;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 4px;
+      padding: 16px 20px;
+      font-family: var(--font);
+      font-size: 1rem;
+      color: var(--text);
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, color 0.15s;
+      line-height: 1.4;
+    }
+
+    .option-btn:hover {
+      border-color: var(--sage);
+      background: var(--light);
+    }
+
+    .option-btn.selected {
+      border-color: var(--teal);
+      background: #EAF0EE;
+      color: var(--teal);
+      font-weight: 500;
+    }
+
+    .nav-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn-back {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-family: var(--font);
+      font-size: 0.95rem;
+      cursor: pointer;
+      padding: 8px 0;
+      text-decoration: underline;
+      transition: color 0.15s;
+    }
+
+    .btn-back:hover { color: var(--teal); }
+
+    .btn-next {
+      display: inline-block;
+      background: var(--teal);
+      color: var(--white);
+      font-family: var(--font);
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 14px 36px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, opacity 0.2s;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .btn-next.enabled {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .btn-next.enabled:hover { background: #1e3038; transform: translateY(-1px); }
+
+    /* ── Results ── */
+    #results-screen { display: none; text-align: center; }
+
+    .results-logo {
+      margin: 0 auto 36px;
+      display: block;
+      max-width: 160px;
+      height: auto;
+    }
+
+    .results-headline {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 600;
+      color: var(--teal);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .score-ring-wrap {
+      margin: 36px auto;
+      width: 160px;
+      height: 160px;
+      position: relative;
+    }
+
+    .score-ring-wrap svg {
+      transform: rotate(-90deg);
+      width: 160px;
+      height: 160px;
+    }
+
+    .score-ring-bg { fill: none; stroke: var(--border); stroke-width: 10; }
+    .score-ring-fill { fill: none; stroke: var(--sage); stroke-width: 10; stroke-linecap: round; transition: stroke-dashoffset 1s ease; }
+
+    .score-center {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .score-number {
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: var(--teal);
+      line-height: 1;
+    }
+
+    .score-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* Pillar breakdown */
+    .pillar-breakdown {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 36px 0;
+      text-align: left;
+    }
+
+    .pb-card {
+      background: var(--light);
+      border: 1px solid var(--border);
+      padding: 20px 18px;
+      border-radius: 4px;
+    }
+
+    .pb-card.focus-area {
+      border-top: 3px solid var(--teal);
+    }
+
+    .pb-name {
+      font-size: 0.78rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .pb-score {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--teal);
+      margin-bottom: 6px;
+    }
+
+    .pb-bar-bg {
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .pb-bar-fill {
+      height: 100%;
+      background: var(--sage);
+      border-radius: 2px;
+    }
+
+    .pb-card.focus-area .pb-bar-fill { background: var(--teal); }
+
+    .focus-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--teal);
+      color: var(--white);
+      padding: 2px 8px;
+      border-radius: 2px;
+      margin-bottom: 8px;
+    }
+
+    /* Focus items */
+    .focus-section {
+      text-align: left;
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--teal);
+      padding: 28px 28px;
+      border-radius: 4px;
+      margin: 32px 0;
+    }
+
+    .focus-section h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--teal);
+      margin-bottom: 16px;
+    }
+
+    .focus-section ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .focus-section li {
+      font-size: 0.97rem;
+      color: var(--text);
+      padding-left: 20px;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .focus-section li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--sage);
+    }
+
+    /* CTA section */
+    .cta-section {
+      margin-top: 40px;
+      padding: 36px 32px;
+      background: var(--teal);
+      border-radius: 6px;
+      color: var(--white);
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-size: 1.6rem;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .cta-section p {
+      font-size: 0.97rem;
+      opacity: 0.85;
+      margin-bottom: 28px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-section .btn-primary {
+      background: var(--white);
+      color: var(--teal);
+    }
+
+    .cta-section .btn-primary:hover { background: var(--light); }
+
+    .cta-section .btn-secondary {
+      border-color: rgba(255,255,255,0.5);
+      color: var(--white);
+    }
+
+    .cta-section .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+
+    .newsletter-cta {
+      margin-top: 32px;
+      padding: 28px 24px;
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      text-align: center;
+    }
+
+    .newsletter-cta p { font-size: 0.97rem; color: var(--muted); margin-bottom: 14px; }
+
+    .newsletter-cta a {
+      color: var(--teal);
+      font-weight: 600;
+      text-decoration: underline;
+    }
+
+    /* Disclaimer */
+    .disclaimer {
+      margin-top: 40px;
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.6;
+      text-align: center;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Email gate */
+    #email-screen {
+      display: none;
+      text-align: center;
+    }
+
+    .email-form {
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    .email-form h2 {
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: var(--teal);
+      margin-bottom: 10px;
+    }
+
+    .email-form p {
+      font-size: 0.97rem;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .email-field {
+      width: 100%;
+      padding: 14px 16px;
+      font-family: var(--font);
+      font-size: 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 4px;
+      color: var(--text);
+      margin-bottom: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .email-field:focus { border-color: var(--teal); }
+
+    .email-skip {
+      display: block;
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      cursor: pointer;
+      text-decoration: underline;
+      background: none;
+      border: none;
+      font-family: var(--font);
+    }
+
+    .email-skip:hover { color: var(--teal); }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 40px 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      header { padding: 14px 20px; }
+      main { padding: 32px 16px 64px; }
+      .pillars-preview { grid-template-columns: 1fr; }
+      .pillar-breakdown { grid-template-columns: 1fr; }
+      .cta-btns { flex-direction: column; align-items: center; }
+      .nav-row { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header>
+  <div class="logo-wrap">
+    <img src="tpf horizontal.jpg" alt="Two Palms Financial" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+    <span style="display:none; font-family: var(--font); font-size: 1.1rem; font-weight: 600; color: var(--teal); letter-spacing: 0.04em;">Two Palms Financial</span>
+  </div>
+</header>
+
+<!-- ── Main ── -->
+<main>
+
+  <!-- Progress indicator -->
+  <div id="progress-wrap">
+    <div class="progress-labels">
+      <span class="progress-label" id="pl-1">Financial Readiness</span>
+      <span class="progress-label" id="pl-2">Business Value</span>
+      <span class="progress-label" id="pl-3">Life Planning</span>
+    </div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progress-fill" style="width: 0%"></div>
+    </div>
+    <div class="progress-count" id="progress-count">Question 1 of 16</div>
+  </div>
+
+  <!-- ── Intro Screen ── -->
+  <div id="intro-screen">
+    <div class="time-badge">5 minutes · 19 questions</div>
+    <h1 class="hero-title">Are You Ready<br>to Exit Your Business?</h1>
+    <p class="hero-sub">A 19-question assessment for business owners at $3M–$50M in revenue who are thinking seriously about what's next.</p>
+
+    <div class="pillars-preview">
+      <div class="pillar-card">
+        <div class="num">Pillar 1</div>
+        <div class="name">Financial Readiness</div>
+      </div>
+      <div class="pillar-card">
+        <div class="num">Pillar 2</div>
+        <div class="name">Business Composition &amp; Transferable Value</div>
+      </div>
+      <div class="pillar-card">
+        <div class="num">Pillar 3</div>
+        <div class="name">Life Planning &amp; Psychological Readiness</div>
+      </div>
+    </div>
+
+    <button class="btn-primary" onclick="startAssessment()">Begin Assessment</button>
+  </div>
+
+  <!-- ── Question Screen ── -->
+  <div id="question-screen">
+    <div class="pillar-label" id="q-pillar"></div>
+    <div class="question-text" id="q-text"></div>
+    <ul class="options-list" id="q-options"></ul>
+    <div class="nav-row">
+      <button class="btn-back" id="btn-back" onclick="prevQuestion()">← Back</button>
+      <button class="btn-next" id="btn-next" onclick="nextQuestion()">Continue</button>
+    </div>
+  </div>
+
+  <!-- ── Email Gate Screen ── -->
+  <div id="email-screen">
+    <div class="email-form">
+      <h2>Your results are ready.</h2>
+      <p>Enter your email to view your Exit Readiness score and personalized breakdown. No spam — ever.</p>
+      <input type="email" class="email-field" id="email-input" placeholder="your@email.com" />
+      <button class="btn-primary" style="width:100%;" onclick="submitEmail()">View My Results</button>
+      <button class="email-skip" onclick="showResults()">Skip — show results without saving</button>
+    </div>
+  </div>
+
+  <!-- ── Results Screen ── -->
+  <div id="results-screen">
+    <img src="TPF logo final.png" alt="Two Palms Financial" class="results-logo"
+      onerror="this.style.display='none';" />
+
+    <div class="score-ring-wrap">
+      <svg viewBox="0 0 160 160">
+        <circle class="score-ring-bg" cx="80" cy="80" r="70" />
+        <circle class="score-ring-fill" id="score-ring" cx="80" cy="80" r="70"
+          stroke-dasharray="439.82"
+          stroke-dashoffset="439.82" />
+      </svg>
+      <div class="score-center">
+        <div class="score-number" id="score-display">—</div>
+        <div class="score-label">out of 100</div>
+      </div>
+    </div>
+
+    <h1 class="results-headline" id="results-headline"></h1>
+    <p id="results-subhead" style="color: var(--muted); font-size: 1.05rem; margin-bottom: 8px;"></p>
+
+    <!-- Pillar breakdown -->
+    <div class="pillar-breakdown" id="pillar-breakdown"></div>
+
+    <!-- Focus area items (not-ready only) -->
+    <div id="focus-items"></div>
+
+    <!-- CTA -->
+    <div id="cta-block"></div>
+
+    <div class="disclaimer">
+      This assessment is for educational purposes only and does not constitute financial, legal, or investment advice. Results are a directional indicator only.
+    </div>
+  </div>
+
+</main>
+
+<script>
+  // ── Question Data ──
+  const questions = [
+    // Pillar 1 — Financial Readiness
+    {
+      pillar: 1, pillarName: "Financial Readiness",
+      text: "Are your financials clean and current?",
+      options: [
+        { label: "Audited or reviewed by a CPA, fully up to date", score: 5 },
+        { label: "Compiled and current", score: 3 },
+        { label: "Internal only — QuickBooks or similar", score: 1 },
+        { label: "Messy, behind, or not sure", score: 0 },
+      ]
+    },
+    {
+      pillar: 1, pillarName: "Financial Readiness",
+      text: "Have you had a formal business valuation in the last 24 months?",
+      options: [
+        { label: "Yes — formal valuation within the last two years", score: 5 },
+        { label: "Yes, but it's more than two years old", score: 3 },
+        { label: "No formal valuation — I have a rough idea", score: 1 },
+        { label: "No — I don't know what my business is worth", score: 0 },
+      ]
+    },
+    {
+      pillar: 1, pillarName: "Financial Readiness",
+      text: "Are your profit margins stable or improving over the last 3 years?",
+      options: [
+        { label: "Improving consistently", score: 5 },
+        { label: "Stable and predictable", score: 4 },
+        { label: "Roughly flat with some variation", score: 2 },
+        { label: "Declining or unpredictable", score: 0 },
+      ]
+    },
+
+    // Pillar 2 — Business Composition & Transferable Value
+    {
+      pillar: 2, pillarName: "Business Composition & Transferable Value",
+      text: "Could the business run for 60 days without you?",
+      options: [
+        { label: "Easily — my team handles it", score: 5 },
+        { label: "With some friction — a few things would slip", score: 3 },
+        { label: "Barely — it would struggle", score: 1 },
+        { label: "Not at all — I'm in everything", score: 0 },
+      ]
+    },
+    {
+      pillar: 2, pillarName: "Business Composition & Transferable Value",
+      text: "Do you have a management team that makes decisions without you?",
+      options: [
+        { label: "Yes — a strong team that runs day-to-day", score: 5 },
+        { label: "One key person who handles most decisions", score: 3 },
+        { label: "Just me and a staff — no real management layer", score: 1 },
+        { label: "All decisions run through me", score: 0 },
+      ]
+    },
+    {
+      pillar: 2, pillarName: "Business Composition & Transferable Value",
+      text: "Are key client and vendor relationships tied to the company or to you personally?",
+      options: [
+        { label: "Mostly the company — relationships survive my absence", score: 5 },
+        { label: "Mixed — some tied to me, some to the business", score: 3 },
+        { label: "Mostly me — they'd follow if I left", score: 1 },
+        { label: "All me — the relationships are me", score: 0 },
+      ]
+    },
+    {
+      pillar: 2, pillarName: "Business Composition & Transferable Value",
+      text: "What share of revenue comes from your single largest customer?",
+      options: [
+        { label: "Under 10%", score: 5 },
+        { label: "10–20%", score: 3 },
+        { label: "20–35%", score: 1 },
+        { label: "Over 35%", score: 0 },
+      ]
+    },
+    {
+      pillar: 2, pillarName: "Business Composition & Transferable Value",
+      text: "What share of your revenue depends on your single most critical vendor or supplier?",
+      options: [
+        { label: "Under 10% — well diversified", score: 5 },
+        { label: "10–25% — some dependency but manageable", score: 3 },
+        { label: "25–50% — meaningful concentration", score: 1 },
+        { label: "Over 50% — highly dependent on one vendor", score: 0 },
+      ]
+    },
+    {
+      pillar: 2, pillarName: "Business Composition & Transferable Value",
+      text: "How much of your revenue is recurring or contracted vs. one-off or project-based?",
+      options: [
+        { label: "Mostly recurring — retainers, subscriptions, or multi-year contracts", score: 5 },
+        { label: "Balanced mix of recurring and project work", score: 3 },
+        { label: "Mostly project-based", score: 1 },
+        { label: "Almost entirely one-off engagements", score: 0 },
+      ]
+    },
+    {
+      pillar: 2, pillarName: "Business Composition & Transferable Value",
+      text: "Are customer relationships under written contracts?",
+      options: [
+        { label: "Mostly — the majority of revenue is contracted", score: 5 },
+        { label: "Some — key relationships have agreements", score: 3 },
+        { label: "Few — we rely on handshakes or past practice", score: 1 },
+        { label: "None", score: 0 },
+      ]
+    },
+    {
+      pillar: 2, pillarName: "Business Composition & Transferable Value",
+      text: "Is your operational documentation — SOPs, contracts, IP, org chart — buyer-ready?",
+      options: [
+        { label: "Yes — documented, organized, and accessible", score: 5 },
+        { label: "Mostly — the big things are documented", score: 3 },
+        { label: "Scattered — exists but hard to find or use", score: 1 },
+        { label: "No — little to no documentation", score: 0 },
+      ]
+    },
+    {
+      pillar: 2, pillarName: "Business Composition & Transferable Value",
+      text: "Roughly what share of your total net worth is tied up in this business?",
+      options: [
+        { label: "Under 25%", score: 5 },
+        { label: "25–50%", score: 4 },
+        { label: "50–75%", score: 2 },
+        { label: "Over 75% — it's most of what I have", score: 0 },
+      ]
+    },
+    {
+      pillar: 2, pillarName: "Business Composition & Transferable Value",
+      text: "If you have co-owners, do you have a funded buy-sell agreement in place — and has it been reviewed in the last three years?",
+      options: [
+        { label: "I'm the sole owner — not applicable", score: -2 }, // special: score 5, exclude from denominator
+        { label: "Yes — funded and reviewed within the last three years", score: 5 },
+        { label: "Yes, but it hasn't been reviewed in over three years", score: 3 },
+        { label: "In progress — being drafted or updated", score: 1 },
+        { label: "No — we have multiple owners and no buy-sell in place", score: 0 },
+      ]
+    },
+
+    // Pillar 3 — Life Planning & Psychological Readiness
+    {
+      pillar: 3, pillarName: "Life Planning & Psychological Readiness",
+      text: "Beyond the business, what lights a fire in you? Do you have a good answer to that yet?",
+      options: [
+        { label: "Clear sense of identity and purpose beyond the business", score: 5 },
+        { label: "Starting to think about it", score: 3 },
+        { label: "Occasionally, but no real answer yet", score: 1 },
+        { label: "The business is who I am — I haven't really gone there", score: 0 },
+      ]
+    },
+    {
+      pillar: 3, pillarName: "Life Planning & Psychological Readiness",
+      text: "Have you and your spouse or partner had real conversations about what life looks like after the sale?",
+      options: [
+        { label: "Aligned and both excited about what's next", score: 5 },
+        { label: "Generally on the same page", score: 3 },
+        { label: "Haven't really brought it up yet", score: 1 },
+        { label: "I don't have a partner / not applicable", score: -1 }, // special: score 5, exclude from denominator
+        { label: "Not sure they'd be supportive", score: 0 },
+      ]
+    },
+    {
+      pillar: 3, pillarName: "Life Planning & Psychological Readiness",
+      text: "Do you have a clear picture of what you want to do, experience, or build in the chapter after this business?",
+      options: [
+        { label: "Specific and compelling — I could describe it today", score: 5 },
+        { label: "General direction — I have a sense of it", score: 3 },
+        { label: '"Take a break and figure it out"', score: 1 },
+        { label: "No vision yet", score: 0 },
+      ]
+    },
+    {
+      pillar: 3, pillarName: "Life Planning & Psychological Readiness",
+      text: "It's the morning after your business sale closes. You wake up with nowhere to be. Walk us through your day — what do you do?",
+      options: [
+        { label: "Specific and detailed — I know exactly where I'd be, who I'd be with, and what I'd do", score: 5 },
+        { label: "A few specific things come to mind", score: 3 },
+        { label: '"Probably decompress and take some time off"', score: 1 },
+        { label: "No idea", score: 0 },
+      ]
+    },
+    {
+      pillar: 3, pillarName: "Life Planning & Psychological Readiness",
+      text: "Do you have a sense of how you'd want to hand this off — or who you'd want to hand it to?",
+      options: [
+        { label: "Family transition — passing it to the next generation", score: 5 },
+        { label: "Sale to existing employees or management (MBO/ESOP)", score: 5 },
+        { label: "Financial buyer — private equity or a family office", score: 5 },
+        { label: "Competitor or strategic buyer — someone already in the industry", score: 5 },
+        { label: "Search fund — an entrepreneurial buyer who would acquire and run it post-sale", score: 5 },
+        { label: "Open to any of these — still exploring my options", score: 2 },
+        { label: "I haven't thought much about this yet", score: 0 },
+      ]
+    },
+  ];
+
+  // State
+  let current = 0;
+  let answers = new Array(questions.length).fill(null);
+
+  function startAssessment() {
+    document.getElementById('intro-screen').style.display = 'none';
+    document.getElementById('progress-wrap').style.display = 'block';
+    document.getElementById('question-screen').style.display = 'block';
+    renderQuestion();
+  }
+
+  function renderQuestion() {
+    const q = questions[current];
+    document.getElementById('q-pillar').textContent = `Pillar ${q.pillar} — ${q.pillarName}`;
+    document.getElementById('q-text').textContent = q.text;
+
+    const optList = document.getElementById('q-options');
+    optList.innerHTML = '';
+    q.options.forEach((opt, i) => {
+      const li = document.createElement('li');
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.textContent = opt.label;
+      if (answers[current] !== null && answers[current].idx === i) {
+        btn.classList.add('selected');
+      }
+      btn.addEventListener('click', () => selectOption(i));
+      li.appendChild(btn);
+      optList.appendChild(li);
+    });
+
+    // back button
+    document.getElementById('btn-back').style.visibility = current === 0 ? 'hidden' : 'visible';
+
+    // next button state
+    const nextBtn = document.getElementById('btn-next');
+    const isLast = current === questions.length - 1;
+    nextBtn.textContent = isLast ? 'See My Results' : 'Continue';
+    if (answers[current] !== null) {
+      nextBtn.classList.add('enabled');
+    } else {
+      nextBtn.classList.remove('enabled');
+    }
+
+    updateProgress();
+  }
+
+  function selectOption(idx) {
+    const q = questions[current];
+    const opt = q.options[idx];
+    const noPartner = opt.score === -1;
+    const soleOwner = opt.score === -2;
+    const score = (noPartner || soleOwner) ? 5 : opt.score;
+    answers[current] = { idx, score, noPartner, soleOwner };
+
+    document.querySelectorAll('.option-btn').forEach((b, i) => {
+      b.classList.toggle('selected', i === idx);
+    });
+
+    document.getElementById('btn-next').classList.add('enabled');
+  }
+
+  function nextQuestion() {
+    if (answers[current] === null) return;
+    if (current < questions.length - 1) {
+      current++;
+      renderQuestion();
+    } else {
+      showEmailGate();
+    }
+  }
+
+  function prevQuestion() {
+    if (current > 0) {
+      current--;
+      renderQuestion();
+    }
+  }
+
+  function updateProgress() {
+    const total = questions.length;
+    const pct = ((current) / total) * 100;
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-count').textContent = `Question ${current + 1} of ${total}`;
+
+    const pillar = questions[current].pillar;
+    ['pl-1','pl-2','pl-3'].forEach((id, i) => {
+      const el = document.getElementById(id);
+      el.classList.remove('active','done');
+      if (i + 1 === pillar) el.classList.add('active');
+      if (i + 1 < pillar) el.classList.add('done');
+    });
+  }
+
+  // ── Email Gate ──
+  function showEmailGate() {
+    document.getElementById('question-screen').style.display = 'none';
+    document.getElementById('progress-wrap').style.display = 'none';
+    document.getElementById('email-screen').style.display = 'block';
+  }
+
+  function submitEmail() {
+    const email = document.getElementById('email-input').value.trim();
+    // Basic validation — just proceed regardless (email is optional)
+    showResults();
+  }
+
+  // ── Scoring ──
+  // Pillar 1: indices 0–2   (3 q × 5 = 15 max)
+  // Pillar 2: indices 3–13  (11 q × 5 = 55 max; buy-sell at 13 may be excluded)
+  // Pillar 3: indices 14–19 (6 q × 5 = 30 max; no-partner at 15 may be excluded)
+  function computeResults() {
+    let p1raw = 0, p1max = 15;
+    let p2raw = 0, p2max = 55;
+    let p3raw = 0, p3max = 30;
+    let p3noPartner = false;
+    let totalMax = 100;
+
+    // Pillar 1
+    for (let i = 0; i < 3; i++) { if (answers[i]) p1raw += answers[i].score; }
+
+    // Pillar 2 (indices 3–13; buy-sell at 13 uses score -2 flag for sole owner)
+    for (let i = 3; i < 14; i++) {
+      if (answers[i]) {
+        if (answers[i].soleOwner) { p2max -= 5; }
+        else { p2raw += answers[i].score; }
+      }
+    }
+
+    // Pillar 3 (indices 14–19; no-partner at 15 uses score -1 flag)
+    for (let i = 14; i < 20; i++) {
+      if (answers[i]) {
+        if (answers[i].noPartner) { p3max -= 5; }
+        else { p3raw += answers[i].score; }
+      }
+    }
+    if (answers[15] && answers[15].noPartner) p3noPartner = true;
+
+    totalMax = p1max + p2max + p3max;
+    const totalRaw = p1raw + p2raw + p3raw;
+    const overall = Math.round((totalRaw / totalMax) * 100);
+
+    const p1pct = Math.round((p1raw / p1max) * 100);
+    const p2pct = Math.round((p2raw / p2max) * 100);
+    const p3pct = p3max > 0 ? Math.round((p3raw / p3max) * 100) : 100;
+
+    // Pillar 3 binary check — core psychological questions only (indices 14–17)
+    const p3CoreQuestions = [14, 15, 16, 17];
+    const p3allZero = p3CoreQuestions.every(i => {
+      if (!answers[i]) return true;
+      if (answers[i].noPartner) return false;
+      return answers[i].score === 0;
+    });
+
+    const pillarPcts = [
+      { name: "Financial Readiness", pct: p1pct, raw: p1raw, max: p1max },
+      { name: "Business Composition", pct: p2pct, raw: p2raw, max: p2max },
+      { name: "Life Planning", pct: p3pct, raw: p3raw, max: p3max },
+    ];
+
+    const minPct = Math.min(...pillarPcts.map(p => p.pct));
+    const focusIdx = pillarPcts.findIndex(p => p.pct === minPct);
+    const ready = overall >= 71 && !p3allZero;
+
+    return { overall, pillarPcts, focusIdx, ready, p3allZero };
+  }
+
+  // ── Low-score focus suggestions ──
+  const focusSuggestions = {
+    0: [ // Financial Readiness
+      "Have your financials compiled, reviewed, or audited by a CPA — buyers expect clean books going back 3 years.",
+      "Commission a formal business valuation from a qualified appraiser before going to market.",
+      "Identify the drivers behind any margin decline and build a 12-month plan to stabilize or improve them.",
+    ],
+    1: [ // Business Composition
+      "Start delegating key decisions to a manager or leadership team — buyer confidence depends on the business running without you.",
+      "Convert informal client and vendor relationships into documented, transferable agreements.",
+      "Reduce customer concentration: no single client should represent more than 20% of revenue, and audit vendor dependency just as carefully.",
+      "Build out SOPs, an org chart, and a contracts binder — documentation is due-diligence gold.",
+      "If you have co-owners, make sure your buy-sell agreement is funded and has been reviewed in the last three years — a stale or missing agreement can complicate or kill a deal.",
+    ],
+    2: [ // Life Planning
+      "Spend real time — not just a few minutes — on who you are outside of this business. A financial exit is also a personal transition.",
+      "Have the conversation with your partner about what 'after' looks like. Alignment here prevents major surprises post-close.",
+      "Build a specific, concrete picture of the chapter after the sale. Vague plans lead to seller's remorse.",
+      "Start thinking about the type of exit that fits your goals — family transition, a strategic buyer, private equity, or something else entirely. Knowing what you want shapes everything from timing to deal structure.",
+    ]
+  };
+
+  function getLowestScoringQuestions() {
+    // Find 2-3 questions with lowest scores (absolute, not pct)
+    const scored = answers.map((a, i) => ({
+      q: i,
+      score: a ? a.score : 0,
+      maxScore: questions[i].options[0].score, // highest option score
+    }));
+    scored.sort((a, b) => (a.score / a.maxScore) - (b.score / b.maxScore));
+    return scored.slice(0, 3);
+  }
+
+  function showResults() {
+    document.getElementById('email-screen').style.display = 'none';
+    document.getElementById('results-screen').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    const { overall, pillarPcts, focusIdx, ready, p3allZero } = computeResults();
+
+    // Score ring animation
+    document.getElementById('score-display').textContent = overall;
+    const circumference = 439.82;
+    const offset = circumference - (overall / 100) * circumference;
+    setTimeout(() => {
+      document.getElementById('score-ring').style.strokeDashoffset = offset;
+    }, 100);
+
+    // Headline
+    if (ready) {
+      document.getElementById('results-headline').textContent = "You're Exit Ready.";
+      document.getElementById('results-subhead').textContent = "Your business shows strong indicators of transferable value and personal readiness.";
+    } else if (p3allZero) {
+      document.getElementById('results-headline').textContent = "Strong Business. Important Work Ahead.";
+      document.getElementById('results-subhead').textContent = "Your business may be financially and operationally strong — but the personal side of the exit needs attention before you're truly ready.";
+    } else {
+      document.getElementById('results-headline').textContent = "You're Building Toward Readiness.";
+      document.getElementById('results-subhead').textContent = "There are meaningful steps you can take now to increase your exit readiness and your eventual sale price.";
+    }
+
+    // Pillar breakdown
+    const breakdownEl = document.getElementById('pillar-breakdown');
+    breakdownEl.innerHTML = '';
+    pillarPcts.forEach((p, i) => {
+      const card = document.createElement('div');
+      card.className = 'pb-card' + (i === focusIdx ? ' focus-area' : '');
+      card.innerHTML = `
+        ${i === focusIdx ? '<span class="focus-badge">Focus Area</span>' : ''}
+        <div class="pb-name">${p.name}</div>
+        <div class="pb-score">${p.pct}%</div>
+        <div class="pb-bar-bg"><div class="pb-bar-fill" style="width:${p.pct}%"></div></div>
+      `;
+      breakdownEl.appendChild(card);
+    });
+
+    // Focus items (not-ready only)
+    const focusEl = document.getElementById('focus-items');
+    if (!ready) {
+      const suggestions = focusSuggestions[focusIdx];
+      focusEl.innerHTML = `
+        <div class="focus-section">
+          <h3>Where to focus first: ${pillarPcts[focusIdx].name}</h3>
+          <ul>${suggestions.map(s => `<li>${s}</li>`).join('')}</ul>
+        </div>
+      `;
+    } else {
+      focusEl.innerHTML = '';
+    }
+
+    // CTA
+    const ctaEl = document.getElementById('cta-block');
+    if (ready) {
+      ctaEl.innerHTML = `
+        <div class="cta-section">
+          <h2>Let's talk about your exit.</h2>
+          <p>You've built something worth protecting. Let's make sure you get full value for it.</p>
+          <div class="cta-btns">
+            <a href="https://calendly.com/twopalms/consultation" target="_blank" rel="noopener" class="btn-primary">Book a Complimentary Zoom Call</a>
+            <a href="https://calendly.com/twopalms/consultation" target="_blank" rel="noopener" class="btn-secondary">Local to Orange County? Let's grab coffee</a>
+          </div>
+        </div>
+      `;
+    } else {
+      ctaEl.innerHTML = `
+        <div class="newsletter-cta">
+          <p>Get weekly insights on exit planning — practical guidance for business owners at every stage.</p>
+          <a href="https://www.twopalmsfinancial.com/between-two-palms-newsletter" target="_blank" rel="noopener">Subscribe to Between Two Palms →</a>
+        </div>
+      `;
+    }
+  }
+</script>
+</body>
+</html>

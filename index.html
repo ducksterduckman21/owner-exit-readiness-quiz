@@ -674,6 +674,7 @@
       <p>Enter your email to view your Exit Readiness score and personalized breakdown. No spam — ever.</p>
       <input type="email" class="email-field" id="email-input" placeholder="your@email.com" />
       <button class="btn-primary" style="width:100%;" onclick="submitEmail()">View My Results</button>
+      <p style="font-size:0.78rem; color:var(--muted); margin-top:10px;">Your email is never sold or shared. Unsubscribe anytime. <a href="#privacy-policy" style="color:var(--teal);">Privacy Policy</a></p>
       <button class="email-skip" onclick="showResults()">Skip — show results without saving</button>
     </div>
   </div>
@@ -709,7 +710,20 @@
     <div id="cta-block"></div>
 
     <div class="disclaimer">
-      This assessment is for educational purposes only and does not constitute financial, legal, or investment advice. Results are a directional indicator only.
+      This assessment is for educational purposes only and does not constitute financial, legal, or investment advice. Results are a directional indicator only and do not reflect the actual market value, saleability, or financial condition of any business. Two Palms Financial is a registered investment adviser. Use of this tool does not establish an advisory relationship.
+    </div>
+  </div>
+
+  <!-- Privacy Policy -->
+  <div id="privacy-policy" style="margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--border);">
+    <h2 style="font-size:1.2rem; font-weight:600; color:var(--teal); margin-bottom:16px;">Privacy Policy</h2>
+    <div style="font-size:0.85rem; color:var(--muted); line-height:1.8; max-width:680px;">
+      <p style="margin-bottom:12px;">Two Palms Financial recognizes that our relationship with you is based on integrity and trust. We will not sell your personal information or share it with unaffiliated third parties except as required by law.</p>
+      <p style="margin-bottom:8px;"><strong style="color:var(--text);">What we collect.</strong> If you choose to provide your email address through this assessment, we collect only that address. All scoring is computed locally in your browser — no financial inputs are transmitted or stored.</p>
+      <p style="margin-bottom:8px;"><strong style="color:var(--text);">How we use it.</strong> Your email may be used to send educational content related to exit planning and business transition. You may unsubscribe at any time.</p>
+      <p style="margin-bottom:8px;"><strong style="color:var(--text);">How we protect it.</strong> We maintain physical, electronic, and procedural safeguards to protect your information. Any third-party service providers we use are subject to confidentiality agreements.</p>
+      <p style="margin-bottom:8px;"><strong style="color:var(--text);">Your rights.</strong> You may request deletion of your information at any time by contacting us directly.</p>
+      <p style="margin-bottom:0;"><strong style="color:var(--text);">Contact.</strong> Daniel Costigan, Chief Compliance Officer &mdash; <a href="tel:3143411284" style="color:var(--teal);">(314) 341-1284</a>. Two Palms Financial is a registered investment adviser.</p>
     </div>
   </div>
 
@@ -877,12 +891,12 @@
     },
     {
       pillar: 3, pillarName: "Life Planning & Psychological Readiness",
-      text: "Do you have a clear picture of what you want to do, experience, or build in the chapter after this business?",
+      text: "When you picture life after the sale — outside of money — who are your people? What's your community?",
       options: [
-        { label: "Specific and compelling — I could describe it today", score: 5 },
-        { label: "General direction — I have a sense of it", score: 3 },
-        { label: '"Take a break and figure it out"', score: 1 },
-        { label: "No vision yet", score: 0 },
+        { label: "Clear and full — I have close relationships, interests, and community that have nothing to do with the business", score: 5 },
+        { label: "Mostly there — a few areas I'd want to rebuild or deepen", score: 3 },
+        { label: "Thinner than I'd like — most of my social life runs through the business", score: 1 },
+        { label: "If I'm honest, the business is my community", score: 0 },
       ]
     },
     {
@@ -893,6 +907,16 @@
         { label: "A few specific things come to mind", score: 3 },
         { label: '"Probably decompress and take some time off"', score: 1 },
         { label: "No idea", score: 0 },
+      ]
+    },
+    {
+      pillar: 3, pillarName: "Life Planning & Psychological Readiness",
+      text: "Honestly — when you imagine handing over the keys, the email login, the client list — what's your gut reaction?",
+      options: [
+        { label: "Ready. I've built what I set out to build — and I'm genuinely excited for what's next", score: 5 },
+        { label: "Excited but nervous — it's a big transition and I know I'd need time to process it", score: 3 },
+        { label: "I know I should be ready, but I'm not sure I can let go", score: 1 },
+        { label: "That thought makes me uncomfortable — I don't think I'm there yet", score: 0 },
       ]
     },
     {
@@ -1019,45 +1043,42 @@
 
   // ── Scoring ──
   // Pillar 1: indices 0–2   (3 q × 5 = 15 max)
-  // Pillar 2: indices 3–13  (11 q × 5 = 55 max; buy-sell at 13 may be excluded)
-  // Pillar 3: indices 14–19 (6 q × 5 = 30 max; no-partner at 15 may be excluded)
+  // Pillar 2: indices 3–12  (10 q × 5 = 50 max; buy-sell at 12 may be excluded for sole owner)
+  // Pillar 3: indices 13–18 (6 q × 5 = 30 max; no-partner at 14 may be excluded)
+  // Weighted overall: P1 30% + P2 45% + P3 25%
   function computeResults() {
     let p1raw = 0, p1max = 15;
-    let p2raw = 0, p2max = 55;
+    let p2raw = 0, p2max = 50;
     let p3raw = 0, p3max = 30;
-    let p3noPartner = false;
-    let totalMax = 100;
 
     // Pillar 1
     for (let i = 0; i < 3; i++) { if (answers[i]) p1raw += answers[i].score; }
 
-    // Pillar 2 (indices 3–13; buy-sell at 13 uses score -2 flag for sole owner)
-    for (let i = 3; i < 14; i++) {
+    // Pillar 2 (indices 3–12; buy-sell at 12 uses soleOwner flag)
+    for (let i = 3; i < 13; i++) {
       if (answers[i]) {
         if (answers[i].soleOwner) { p2max -= 5; }
         else { p2raw += answers[i].score; }
       }
     }
 
-    // Pillar 3 (indices 14–19; no-partner at 15 uses score -1 flag)
-    for (let i = 14; i < 20; i++) {
+    // Pillar 3 (indices 13–18; no-partner at 14 uses noPartner flag)
+    for (let i = 13; i < 19; i++) {
       if (answers[i]) {
         if (answers[i].noPartner) { p3max -= 5; }
         else { p3raw += answers[i].score; }
       }
     }
-    if (answers[15] && answers[15].noPartner) p3noPartner = true;
-
-    totalMax = p1max + p2max + p3max;
-    const totalRaw = p1raw + p2raw + p3raw;
-    const overall = Math.round((totalRaw / totalMax) * 100);
 
     const p1pct = Math.round((p1raw / p1max) * 100);
     const p2pct = Math.round((p2raw / p2max) * 100);
     const p3pct = p3max > 0 ? Math.round((p3raw / p3max) * 100) : 100;
 
-    // Pillar 3 binary check — core psychological questions only (indices 14–17)
-    const p3CoreQuestions = [14, 15, 16, 17];
+    // Weighted overall score: 30% financial, 45% business, 25% life planning
+    const overall = Math.min(100, Math.round(p1pct * 0.30 + p2pct * 0.45 + p3pct * 0.25));
+
+    // Pillar 3 binary check — core psychological questions only (indices 13–17, not exit path)
+    const p3CoreQuestions = [13, 14, 15, 16, 17];
     const p3allZero = p3CoreQuestions.every(i => {
       if (!answers[i]) return true;
       if (answers[i].noPartner) return false;
@@ -1072,7 +1093,7 @@
 
     const minPct = Math.min(...pillarPcts.map(p => p.pct));
     const focusIdx = pillarPcts.findIndex(p => p.pct === minPct);
-    const ready = overall >= 71 && !p3allZero;
+    const ready = overall >= 75 && !p3allZero;
 
     return { overall, pillarPcts, focusIdx, ready, p3allZero };
   }
@@ -1127,8 +1148,8 @@
 
     // Headline
     if (ready) {
-      document.getElementById('results-headline').textContent = "You're Exit Ready.";
-      document.getElementById('results-subhead').textContent = "Your business shows strong indicators of transferable value and personal readiness.";
+      document.getElementById('results-headline').textContent = "Your results suggest strong exit readiness.";
+      document.getElementById('results-subhead').textContent = "Your business shows meaningful indicators of transferable value and personal readiness.";
     } else if (p3allZero) {
       document.getElementById('results-headline').textContent = "Strong Business. Important Work Ahead.";
       document.getElementById('results-subhead').textContent = "Your business may be financially and operationally strong — but the personal side of the exit needs attention before you're truly ready.";
@@ -1166,17 +1187,37 @@
       focusEl.innerHTML = '';
     }
 
+    // Deal-killer flags (always shown)
+    const flagsEl = document.getElementById('focus-items');
+    const flagsHtml = `
+      <div class="focus-section" style="border-left-color: var(--sage); margin-top: 24px;">
+        <h3 style="color: var(--teal);">Before you go to market — verify these</h3>
+        <p style="font-size:0.9rem; color:var(--muted); margin-bottom:16px;">These items don't appear in your score, but any one of them can slow or kill a deal during due diligence.</p>
+        <ul>
+          <li><strong>Lease assignability:</strong> If you operate from leased space, confirm the lease is assignable to a buyer and check how much term remains. A short or non-assignable lease is a common deal complication.</li>
+          <li><strong>Pending litigation or regulatory exposure:</strong> Any open lawsuits, regulatory investigations, or unresolved claims should be disclosed and addressed before going to market.</li>
+          <li><strong>Key employee retention agreements:</strong> Confirm that any employees critical to operations have signed agreements that survive a change of ownership. A buyer paying for your team needs confidence those people stay.</li>
+        </ul>
+      </div>
+    `;
+    if (!ready) {
+      flagsEl.innerHTML += flagsHtml;
+    } else {
+      flagsEl.innerHTML = flagsHtml;
+    }
+
     // CTA
     const ctaEl = document.getElementById('cta-block');
     if (ready) {
       ctaEl.innerHTML = `
         <div class="cta-section">
-          <h2>Let's talk about your exit.</h2>
-          <p>You've built something worth protecting. Let's make sure you get full value for it.</p>
+          <h2>Let's explore what your results mean for you.</h2>
+          <p>A complimentary conversation to talk through your score, your timeline, and what a well-planned exit could look like.</p>
           <div class="cta-btns">
             <a href="https://calendly.com/twopalms/consultation" target="_blank" rel="noopener" class="btn-primary">Book a Complimentary Zoom Call</a>
             <a href="https://calendly.com/twopalms/consultation" target="_blank" rel="noopener" class="btn-secondary">Local to Orange County? Let's grab coffee</a>
           </div>
+          <p style="font-size:0.75rem; opacity:0.65; margin-top:18px; margin-bottom:0;">This is a complimentary educational conversation, not an offer of advisory services.</p>
         </div>
       `;
     } else {

@@ -771,7 +771,6 @@
         { label: "Yes — I know our adjusted EBITDA and could walk a buyer through the normalization", score: 5 },
         { label: "I know it roughly — within a meaningful range", score: 3 },
         { label: "I've heard the term but couldn't give you a confident number", score: 1 },
-        { label: "Honestly, I have no idea what my EBITDA is", score: 0 },
       ]
     },
 
@@ -1026,7 +1025,7 @@
 
   function updateProgress() {
     const total = questions.length;
-    const pct = ((current) / total) * 100;
+    const pct = ((current + 1) / total) * 100;
     document.getElementById('progress-fill').style.width = pct + '%';
     document.getElementById('progress-count').textContent = `Question ${current + 1} of ${total}`;
 

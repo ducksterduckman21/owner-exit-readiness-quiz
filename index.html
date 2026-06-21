@@ -634,9 +634,9 @@
 
   <!-- ── Intro Screen ── -->
   <div id="intro-screen">
-    <div class="time-badge">5 minutes · 19 questions</div>
+    <div class="time-badge">5 minutes · 20 questions</div>
     <h1 class="hero-title">Are You Ready<br>to Exit Your Business?</h1>
-    <p class="hero-sub">A 19-question assessment for business owners at $3M–$50M in revenue who are thinking seriously about what's next.</p>
+    <p class="hero-sub">A 20-question assessment for business owners at $3M–$50M in revenue who are thinking seriously about what's next.</p>
 
     <div class="pillars-preview">
       <div class="pillar-card">
@@ -735,32 +735,40 @@
     // Pillar 1 — Financial Readiness
     {
       pillar: 1, pillarName: "Financial Readiness",
-      text: "Are your financials clean and current?",
+      text: "Which of these best describes the current state of your financial records?",
       options: [
+        { label: "Less organized than I'd like", score: 0 },
+        { label: "Kept current and accurate internally, but never reviewed by an outside accountant", score: 1 },
+        { label: "Compiled by an outside accountant, current", score: 3 },
         { label: "Audited or reviewed by a CPA, fully up to date", score: 5 },
-        { label: "Compiled and current", score: 3 },
-        { label: "Internal only — QuickBooks or similar", score: 1 },
-        { label: "Messy, behind, or not sure", score: 0 },
       ]
     },
     {
       pillar: 1, pillarName: "Financial Readiness",
       text: "Have you had a formal business valuation in the last 24 months?",
       options: [
-        { label: "Yes — formal valuation within the last two years", score: 5 },
-        { label: "Yes, but it's more than two years old", score: 3 },
-        { label: "No formal valuation — I have a rough idea", score: 1 },
         { label: "No — I don't know what my business is worth", score: 0 },
+        { label: "No formal valuation — I have a rough idea", score: 1 },
+        { label: "Yes, but it's more than two years old", score: 3 },
+        { label: "Yes — formal valuation within the last two years", score: 5 },
       ]
     },
     {
       pillar: 1, pillarName: "Financial Readiness",
-      text: "Are your profit margins stable or improving over the last 3 years?",
+      text: "Is the business revenue:",
       options: [
-        { label: "Improving consistently", score: 5 },
-        { label: "Stable and predictable", score: 4 },
-        { label: "Roughly flat with some variation", score: 2 },
-        { label: "Declining or unpredictable", score: 0 },
+        { label: "Decreasing", score: 0 },
+        { label: "Stable", score: 3 },
+        { label: "Increasing", score: 5 },
+      ]
+    },
+    {
+      pillar: 1, pillarName: "Financial Readiness",
+      text: "Which of these best describes the ability to forecast near-term revenue?",
+      options: [
+        { label: "Low — unpredictable", score: 0 },
+        { label: "Moderate — some variation", score: 3 },
+        { label: "High — predictable", score: 5 },
       ]
     },
 
@@ -779,10 +787,10 @@
       pillar: 2, pillarName: "Business Composition & Transferable Value",
       text: "Could the business run for 60 days without you?",
       options: [
-        { label: "Easily — my team handles it", score: 5 },
-        { label: "With some friction — a few things would slip", score: 3 },
-        { label: "Barely — it would struggle", score: 1 },
         { label: "Not at all — I'm in everything", score: 0 },
+        { label: "Barely — it would struggle", score: 1 },
+        { label: "With some friction — a few things would slip", score: 3 },
+        { label: "Easily — my team handles it", score: 5 },
       ]
     },
     {
@@ -799,10 +807,10 @@
       pillar: 2, pillarName: "Business Composition & Transferable Value",
       text: "Are key client and vendor relationships tied to the company or to you personally?",
       options: [
-        { label: "Mostly the company — relationships survive my absence", score: 5 },
-        { label: "Mixed — some tied to me, some to the business", score: 3 },
-        { label: "Mostly me — they'd follow if I left", score: 1 },
         { label: "All me — the relationships are me", score: 0 },
+        { label: "Mostly me — they'd follow if I left", score: 1 },
+        { label: "Mixed — some tied to me, some to the business", score: 3 },
+        { label: "Mostly the company — relationships survive my absence", score: 5 },
       ]
     },
     {
@@ -837,12 +845,12 @@
     },
     {
       pillar: 2, pillarName: "Business Composition & Transferable Value",
-      text: "Are customer relationships under written contracts?",
+      text: "Are your customer relationships backed by signed contracts or contractual statements of work?",
       options: [
-        { label: "Mostly — the majority of revenue is contracted", score: 5 },
-        { label: "Some — key relationships have agreements", score: 3 },
-        { label: "Few — we rely on handshakes or past practice", score: 1 },
         { label: "None", score: 0 },
+        { label: "Few — we rely on handshakes or past practice", score: 1 },
+        { label: "Some — key relationships have a signed contract or statement of work", score: 3 },
+        { label: "Most — the majority of revenue is covered by a signed contract or statement of work", score: 5 },
       ]
     },
     {
@@ -1053,25 +1061,25 @@
   }
 
   // ── Scoring ──
-  // Pillar 1: indices 0–3   (4 q × 5 = 20 max)
-  // Pillar 2: indices 4–12  (9 q × 5 = 45 max)
-  // Pillar 3: indices 13–18 (6 q × 5 = 30 max; no-partner at 14 may be excluded)
+  // Pillar 1: indices 0–4   (5 q × 5 = 25 max)
+  // Pillar 2: indices 5–13  (9 q × 5 = 45 max)
+  // Pillar 3: indices 14–19 (6 q × 5 = 30 max; no-partner at 15 may be excluded)
   // Weighted overall: P1 30% + P2 45% + P3 25%
   function computeResults() {
-    let p1raw = 0, p1max = 20;
+    let p1raw = 0, p1max = 25;
     let p2raw = 0, p2max = 45;
     let p3raw = 0, p3max = 30;
 
     // Pillar 1
-    for (let i = 0; i < 4; i++) { if (answers[i]) p1raw += answers[i].score; }
+    for (let i = 0; i < 5; i++) { if (answers[i]) p1raw += answers[i].score; }
 
-    // Pillar 2 (indices 4–12)
-    for (let i = 4; i < 13; i++) {
+    // Pillar 2 (indices 5–13)
+    for (let i = 5; i < 14; i++) {
       if (answers[i]) p2raw += answers[i].score;
     }
 
-    // Pillar 3 (indices 13–18; no-partner at 14 uses noPartner flag)
-    for (let i = 13; i < 19; i++) {
+    // Pillar 3 (indices 14–19; no-partner at 15 uses noPartner flag)
+    for (let i = 14; i < 20; i++) {
       if (answers[i]) {
         if (answers[i].noPartner) { p3max -= 5; }
         else { p3raw += answers[i].score; }
@@ -1085,8 +1093,8 @@
     // Weighted overall score: 30% financial, 45% business, 25% life planning
     const overall = Math.min(100, Math.round(p1pct * 0.30 + p2pct * 0.45 + p3pct * 0.25));
 
-    // Pillar 3 binary check — core psychological questions only (indices 13–17, not exit path)
-    const p3CoreQuestions = [13, 14, 15, 16, 17];
+    // Pillar 3 binary check — core psychological questions only (indices 14–18, not exit path)
+    const p3CoreQuestions = [14, 15, 16, 17, 18];
     const p3allZero = p3CoreQuestions.every(i => {
       if (!answers[i]) return true;
       if (answers[i].noPartner) return false;

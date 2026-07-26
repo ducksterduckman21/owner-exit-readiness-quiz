@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet" />
   <style>
-    /* ── Reset & Base ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -34,7 +33,6 @@
       min-height: 100vh;
     }
 
-    /* ── Header ── */
     header {
       background: var(--white);
       border-bottom: 1px solid var(--border);
@@ -52,14 +50,12 @@
       display: block;
     }
 
-    /* ── Main container ── */
     main {
       max-width: 760px;
       margin: 0 auto;
       padding: 48px 24px 80px;
     }
 
-    /* ── Intro screen ── */
     #intro-screen { text-align: center; }
 
     .hero-title {
@@ -122,7 +118,6 @@
       line-height: 1.3;
     }
 
-    /* ── Buttons ── */
     .btn-primary {
       display: inline-block;
       background: var(--teal);
@@ -159,7 +154,6 @@
 
     .btn-secondary:hover { background: var(--light); transform: translateY(-1px); }
 
-    /* ── Progress bar ── */
     #progress-wrap {
       display: none;
       margin-bottom: 40px;
@@ -204,7 +198,6 @@
       margin-top: 6px;
     }
 
-    /* ── Question card ── */
     #question-screen { display: none; }
 
     .pillar-label {
@@ -303,7 +296,6 @@
 
     .btn-next.enabled:hover { background: #1e3038; transform: translateY(-1px); }
 
-    /* ── Results ── */
     #results-screen { display: none; text-align: center; }
 
     .results-logo {
@@ -358,7 +350,6 @@
       color: var(--muted);
     }
 
-    /* Pillar breakdown */
     .pillar-breakdown {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -374,9 +365,7 @@
       border-radius: 4px;
     }
 
-    .pb-card.focus-area {
-      border-top: 3px solid var(--teal);
-    }
+    .pb-card.focus-area { border-top: 3px solid var(--teal); }
 
     .pb-name {
       font-size: 0.78rem;
@@ -420,7 +409,6 @@
       margin-bottom: 8px;
     }
 
-    /* Focus items */
     .focus-section {
       text-align: left;
       background: var(--light);
@@ -460,7 +448,6 @@
       color: var(--sage);
     }
 
-    /* CTA section */
     .cta-section {
       margin-top: 40px;
       padding: 36px 32px;
@@ -523,7 +510,6 @@
       text-decoration: underline;
     }
 
-    /* Disclaimer */
     .disclaimer {
       margin-top: 40px;
       font-size: 0.75rem;
@@ -535,7 +521,6 @@
       margin-right: auto;
     }
 
-    /* Email gate */
     #email-screen {
       display: none;
       text-align: center;
@@ -588,14 +573,12 @@
 
     .email-skip:hover { color: var(--teal); }
 
-    /* Divider */
     .divider {
       height: 1px;
       background: var(--border);
       margin: 40px 0;
     }
 
-    /* Responsive */
     @media (max-width: 600px) {
       header { padding: 14px 20px; }
       main { padding: 32px 16px 64px; }
@@ -608,7 +591,6 @@
 </head>
 <body>
 
-<!-- ── Header ── -->
 <header>
   <div class="logo-wrap">
     <img src="tpf horizontal.jpg" alt="Two Palms Financial" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
@@ -616,10 +598,8 @@
   </div>
 </header>
 
-<!-- ── Main ── -->
 <main>
 
-  <!-- Progress indicator -->
   <div id="progress-wrap">
     <div class="progress-labels">
       <span class="progress-label" id="pl-1">Financial Readiness</span>
@@ -632,11 +612,10 @@
     <div class="progress-count" id="progress-count">Question 1 of 16</div>
   </div>
 
-  <!-- ── Intro Screen ── -->
   <div id="intro-screen">
-    <div class="time-badge">5 minutes · 20 questions</div>
+    <div class="time-badge">5 minutes · 15 questions</div>
     <h1 class="hero-title">Are You Ready<br>to Exit Your Business?</h1>
-    <p class="hero-sub">A 20-question assessment for business owners at $3M–$50M in revenue who are thinking seriously about what's next.</p>
+    <p class="hero-sub">A 15-question assessment for business owners at $3M–$50M in revenue who are thinking seriously about what's next.</p>
 
     <div class="pillars-preview">
       <div class="pillar-card">
@@ -656,7 +635,6 @@
     <button class="btn-primary" onclick="startAssessment()">Begin Assessment</button>
   </div>
 
-  <!-- ── Question Screen ── -->
   <div id="question-screen">
     <div class="pillar-label" id="q-pillar"></div>
     <div class="question-text" id="q-text"></div>
@@ -667,7 +645,6 @@
     </div>
   </div>
 
-  <!-- ── Email Gate Screen ── -->
   <div id="email-screen">
     <div class="email-form">
       <h2>Your results are ready.</h2>
@@ -679,10 +656,8 @@
     </div>
   </div>
 
-  <!-- ── Results Screen ── -->
   <div id="results-screen">
-    <img src="TPF logo final.png" alt="Two Palms Financial" class="results-logo"
-      onerror="this.style.display='none';" />
+    <img src="TPF logo final.png" alt="Two Palms Financial" class="results-logo" onerror="this.style.display='none';" />
 
     <div class="score-ring-wrap">
       <svg viewBox="0 0 160 160">
@@ -700,21 +675,21 @@
     <h1 class="results-headline" id="results-headline"></h1>
     <p id="results-subhead" style="color: var(--muted); font-size: 1.05rem; margin-bottom: 8px;"></p>
 
-    <!-- Pillar breakdown -->
     <div class="pillar-breakdown" id="pillar-breakdown"></div>
-
-    <!-- Focus area items (not-ready only) -->
     <div id="focus-items"></div>
-
-    <!-- CTA -->
     <div id="cta-block"></div>
+
+    <div style="margin-top: 28px;">
+      <button class="btn-secondary" onclick="generateReport()" style="font-size:0.95rem; padding:12px 28px;">
+        Download Your Full Report
+      </button>
+    </div>
 
     <div class="disclaimer">
       This assessment is for educational purposes only and does not constitute financial, legal, or investment advice. Results are a directional indicator only and do not reflect the actual market value, saleability, or financial condition of any business. Two Palms Financial is a registered investment adviser. Use of this tool does not establish an advisory relationship.
     </div>
   </div>
 
-  <!-- Privacy Policy -->
   <div id="privacy-policy" style="margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--border);">
     <h2 style="font-size:1.2rem; font-weight:600; color:var(--teal); margin-bottom:16px;">Privacy Policy</h2>
     <div style="font-size:0.85rem; color:var(--muted); line-height:1.8; max-width:680px;">
@@ -731,60 +706,43 @@
 
 <script>
   // ── Question Data ──
+  // Index 11 is the unscored routing question (partner status).
+  // Q13 (index 13) is skipped when noPartner is selected.
   const questions = [
-    // Pillar 1 — Financial Readiness
+    // Pillar 1 — Financial Readiness (Q1–Q3, indices 0–2)
     {
-      pillar: 1, pillarName: "Financial Readiness",
-      text: "Which of these best describes the current state of your financial records?",
+      qNum: 1, pillar: 1, pillarName: "Financial Readiness",
+      text: "Are your financials clean and current?",
       options: [
-        { label: "Less organized than I'd like", score: 0 },
-        { label: "Kept current and accurate internally, but never reviewed by an outside accountant", score: 1 },
-        { label: "Compiled by an outside accountant, current", score: 3 },
+        { label: "Messy or behind", score: 0 },
+        { label: "Internal only — organized internally, no outside accountant", score: 1 },
+        { label: "Compiled and current — prepared by a CPA", score: 3 },
         { label: "Audited or reviewed by a CPA, fully up to date", score: 5 },
       ]
     },
     {
-      pillar: 1, pillarName: "Financial Readiness",
+      qNum: 2, pillar: 1, pillarName: "Financial Readiness",
       text: "Have you had a formal business valuation in the last 24 months?",
       options: [
         { label: "No — I don't know what my business is worth", score: 0 },
-        { label: "No formal valuation — I have a rough idea", score: 1 },
+        { label: "Rough idea only", score: 1 },
         { label: "Yes, but it's more than two years old", score: 3 },
         { label: "Yes — formal valuation within the last two years", score: 5 },
       ]
     },
     {
-      pillar: 1, pillarName: "Financial Readiness",
-      text: "Is the business revenue:",
+      qNum: 3, pillar: 1, pillarName: "Financial Readiness",
+      text: "Are your profit margins stable or improving over the last 3 years?",
       options: [
-        { label: "Decreasing", score: 0 },
-        { label: "Stable", score: 3 },
-        { label: "Increasing", score: 5 },
+        { label: "Declining", score: 0 },
+        { label: "Flat", score: 2 },
+        { label: "Stable", score: 4 },
+        { label: "Improving", score: 5 },
       ]
     },
+    // Pillar 2 — Business Composition & Transferable Value (Q4–Q11, indices 3–10)
     {
-      pillar: 1, pillarName: "Financial Readiness",
-      text: "Which of these best describes the ability to forecast near-term revenue?",
-      options: [
-        { label: "Low — unpredictable", score: 0 },
-        { label: "Moderate — some variation", score: 3 },
-        { label: "High — predictable", score: 5 },
-      ]
-    },
-
-    {
-      pillar: 1, pillarName: "Financial Readiness",
-      text: "Do you know your EBITDA — the earnings number buyers use to value your business?",
-      options: [
-        { label: "Yes — I know our adjusted EBITDA and could walk a buyer through the normalization", score: 5 },
-        { label: "I know it roughly — within a meaningful range", score: 3 },
-        { label: "I've heard the term but couldn't give you a confident number", score: 1 },
-      ]
-    },
-
-    // Pillar 2 — Business Composition & Transferable Value
-    {
-      pillar: 2, pillarName: "Business Composition & Transferable Value",
+      qNum: 4, pillar: 2, pillarName: "Business Composition & Transferable Value",
       text: "Could the business run for 60 days without you?",
       options: [
         { label: "Not at all — I'm in everything", score: 0 },
@@ -794,17 +752,17 @@
       ]
     },
     {
-      pillar: 2, pillarName: "Business Composition & Transferable Value",
+      qNum: 5, pillar: 2, pillarName: "Business Composition & Transferable Value",
       text: "Do you have a management team that makes decisions without you?",
       options: [
-        { label: "Yes — a strong team that runs day-to-day", score: 5 },
-        { label: "One key person who handles most decisions", score: 3 },
-        { label: "Just me and a staff — no real management layer", score: 1 },
         { label: "All decisions run through me", score: 0 },
+        { label: "Just me and a staff — no real management layer", score: 1 },
+        { label: "One key person who handles most decisions", score: 3 },
+        { label: "Yes — a strong team that runs day-to-day", score: 5 },
       ]
     },
     {
-      pillar: 2, pillarName: "Business Composition & Transferable Value",
+      qNum: 6, pillar: 2, pillarName: "Business Composition & Transferable Value",
       text: "Are key client and vendor relationships tied to the company or to you personally?",
       options: [
         { label: "All me — the relationships are me", score: 0 },
@@ -814,146 +772,245 @@
       ]
     },
     {
-      pillar: 2, pillarName: "Business Composition & Transferable Value",
+      qNum: 7, pillar: 2, pillarName: "Business Composition & Transferable Value",
       text: "What share of revenue comes from your single largest customer?",
       options: [
-        { label: "Under 10%", score: 5 },
-        { label: "10–20%", score: 3 },
-        { label: "20–35%", score: 1 },
         { label: "Over 35%", score: 0 },
+        { label: "20% to 35%", score: 1 },
+        { label: "10% to 20%", score: 3 },
+        { label: "Under 10%", score: 5 },
       ]
     },
     {
-      pillar: 2, pillarName: "Business Composition & Transferable Value",
-      text: "What share of your revenue depends on your single most critical vendor or supplier?",
+      qNum: 8, pillar: 2, pillarName: "Business Composition & Transferable Value",
+      text: "How much of your revenue is recurring or contracted versus one-off or project based?",
       options: [
-        { label: "Under 10% — well diversified", score: 5 },
-        { label: "10–25% — some dependency but manageable", score: 3 },
-        { label: "25–50% — meaningful concentration", score: 1 },
-        { label: "Over 50% — highly dependent on one vendor", score: 0 },
-      ]
-    },
-    {
-      pillar: 2, pillarName: "Business Composition & Transferable Value",
-      text: "How much of your revenue is recurring or contracted vs. one-off or project-based?",
-      options: [
-        { label: "Mostly recurring — retainers, subscriptions, or multi-year contracts", score: 5 },
-        { label: "Balanced mix of recurring and project work", score: 3 },
+        { label: "All one-off", score: 0 },
         { label: "Mostly project-based", score: 1 },
-        { label: "Almost entirely one-off engagements", score: 0 },
+        { label: "Balanced mix of recurring and project work", score: 3 },
+        { label: "Mostly recurring — retainers, subscriptions, or multi-year contracts", score: 5 },
       ]
     },
     {
-      pillar: 2, pillarName: "Business Composition & Transferable Value",
-      text: "Are your customer relationships backed by signed contracts or contractual statements of work?",
+      qNum: 9, pillar: 2, pillarName: "Business Composition & Transferable Value",
+      text: "Are customer relationships under written contracts?",
       options: [
         { label: "None", score: 0 },
         { label: "Few — we rely on handshakes or past practice", score: 1 },
         { label: "Some — key relationships have a signed contract or statement of work", score: 3 },
-        { label: "Most — the majority of revenue is covered by a signed contract or statement of work", score: 5 },
+        { label: "Mostly — the majority of revenue is under a signed contract or statement of work", score: 5 },
       ]
     },
     {
-      pillar: 2, pillarName: "Business Composition & Transferable Value",
-      text: "Is your operational documentation — SOPs, contracts, IP, org chart — buyer-ready?",
+      qNum: 10, pillar: 2, pillarName: "Business Composition & Transferable Value",
+      text: "Is your operational documentation (SOPs, contracts, IP, org chart) buyer ready?",
       options: [
-        { label: "Yes — documented, organized, and accessible", score: 5 },
-        { label: "Mostly — the big things are documented", score: 3 },
-        { label: "Scattered — exists but hard to find or use", score: 1 },
         { label: "No — little to no documentation", score: 0 },
+        { label: "Scattered — exists but hard to find or use", score: 1 },
+        { label: "Mostly — the big things are documented", score: 3 },
+        { label: "Yes — documented, organized, and accessible", score: 5 },
       ]
     },
     {
-      pillar: 2, pillarName: "Business Composition & Transferable Value",
+      qNum: 11, pillar: 2, pillarName: "Business Composition & Transferable Value",
       text: "Roughly what share of your total net worth is tied up in this business?",
       options: [
-        { label: "Under 25%", score: 5 },
-        { label: "25–50%", score: 4 },
-        { label: "50–75%", score: 2 },
         { label: "Over 75% — it's most of what I have", score: 0 },
+        { label: "50% to 75%", score: 2 },
+        { label: "25% to 50%", score: 4 },
+        { label: "Under 25%", score: 5 },
       ]
     },
-    // Pillar 3 — Life Planning & Psychological Readiness
+    // Routing question — index 11 (not scored)
     {
-      pillar: 3, pillarName: "Life Planning & Psychological Readiness",
-      text: "Beyond the business, what lights a fire in you? Do you have a good answer to that yet?",
+      qNum: null, pillar: 3, pillarName: "Life Planning & Psychological Readiness",
+      isRouting: true,
+      text: "Does your spouse or partner have an ownership stake or decision-making role in this business?",
       options: [
-        { label: "Clear sense of identity and purpose beyond the business", score: 5 },
-        { label: "Starting to think about it", score: 3 },
-        { label: "Occasionally, but no real answer yet", score: 1 },
-        { label: "The business is who I am — I haven't really gone there", score: 0 },
+        { label: "Yes", score: 0 },
+        { label: "No", score: 0 },
+        { label: "I don't have a spouse or partner", score: 0, noPartner: true },
       ]
     },
+    // Pillar 3 — Life Planning (Q12–Q15, indices 12–15)
     {
-      pillar: 3, pillarName: "Life Planning & Psychological Readiness",
-      text: "Have you and your spouse or partner had real conversations about what life looks like after the sale?",
+      qNum: 12, pillar: 3, pillarName: "Life Planning & Psychological Readiness",
+      noShuffle: true,
+      text: "To what extent do you feel emotionally ready to sell your business?",
       options: [
-        { label: "Aligned and both excited about what's next", score: 5 },
-        { label: "Generally on the same page", score: 3 },
-        { label: "Haven't really brought it up yet", score: 1 },
-        { label: "I don't have a partner / not applicable", score: -1 }, // special: score 5, exclude from denominator
-        { label: "Not sure they'd be supportive", score: 0 },
-      ]
-    },
-    {
-      pillar: 3, pillarName: "Life Planning & Psychological Readiness",
-      text: "When you picture life after the sale — outside of money — who are your people? What's your community?",
-      options: [
-        { label: "Clear and full — I have close relationships, interests, and community that have nothing to do with the business", score: 5 },
-        { label: "Mostly there — a few areas I'd want to rebuild or deepen", score: 3 },
-        { label: "Thinner than I'd like — most of my social life runs through the business", score: 1 },
-        { label: "If I'm honest, the business is my community", score: 0 },
+        { label: "Not at all ready", score: 0 },
+        { label: "A little ready but hesitant", score: 1 },
+        { label: "Somewhat ready", score: 2 },
+        { label: "Moderately ready", score: 3 },
+        { label: "Mostly ready", score: 4 },
+        { label: "Completely ready", score: 5 },
       ]
     },
     {
-      pillar: 3, pillarName: "Life Planning & Psychological Readiness",
-      text: "It's the morning after your business sale closes. You wake up with nowhere to be. Walk us through your day — what do you do?",
+      qNum: 13, pillar: 3, pillarName: "Life Planning & Psychological Readiness",
+      noShuffle: true,
+      text: "To what extent have you and your spouse or partner discussed your post-sale life goals?",
       options: [
-        { label: "Specific and detailed — I know exactly where I'd be, who I'd be with, and what I'd do", score: 5 },
-        { label: "A few specific things come to mind", score: 3 },
-        { label: '"Probably decompress and take some time off"', score: 1 },
+        { label: "Have not discussed", score: 0 },
+        { label: "Mentioned it briefly", score: 1 },
+        { label: "Had some conversations", score: 2 },
+        { label: "Discussed it seriously", score: 3 },
+        { label: "Mostly aligned", score: 4 },
+        { label: "Completely aligned", score: 5 },
+      ]
+    },
+    {
+      qNum: 14, pillar: 3, pillarName: "Life Planning & Psychological Readiness",
+      noShuffle: true,
+      text: "To what extent do you have a clear vision for your life after selling this business?",
+      options: [
+        { label: "No vision at all", score: 0 },
+        { label: "Very vague", score: 1 },
+        { label: "Some general ideas", score: 2 },
+        { label: "Moderately clear", score: 3 },
+        { label: "Mostly clear", score: 4 },
+        { label: "Completely clear", score: 5 },
+      ]
+    },
+    {
+      qNum: 15, pillar: 3, pillarName: "Life Planning & Psychological Readiness",
+      noShuffle: true,
+      text: "How specifically could you describe your typical day in the first month after your business sale closes?",
+      options: [
         { label: "No idea", score: 0 },
-      ]
-    },
-    {
-      pillar: 3, pillarName: "Life Planning & Psychological Readiness",
-      text: "Honestly — when you imagine handing over the keys, the email login, the client list — what's your gut reaction?",
-      options: [
-        { label: "Ready. I've built what I set out to build — and I'm genuinely excited for what's next", score: 5 },
-        { label: "Excited but nervous — it's a big transition and I know I'd need time to process it", score: 3 },
-        { label: "I know I should be ready, but I'm not sure I can let go", score: 1 },
-        { label: "That thought makes me uncomfortable — I don't think I'm there yet", score: 0 },
-      ]
-    },
-    {
-      pillar: 3, pillarName: "Life Planning & Psychological Readiness",
-      text: "Do you have a sense of how you'd want to hand this off — or who you'd want to hand it to?",
-      options: [
-        { label: "Family transition — passing it to the next generation", score: 5 },
-        { label: "Sale to existing employees or management (MBO/ESOP)", score: 5 },
-        { label: "Financial buyer — private equity or a family office", score: 5 },
-        { label: "Competitor or strategic buyer — someone already in the industry", score: 5 },
-        { label: "Search fund — an entrepreneurial buyer who would acquire and run it post-sale", score: 5 },
-        { label: "Open to any of these — still exploring my options", score: 2 },
-        { label: "I haven't thought much about this yet", score: 0 },
+        { label: "Very vague sense", score: 1 },
+        { label: "Some general activities in mind", score: 2 },
+        { label: "Fairly clear picture", score: 3 },
+        { label: "Detailed picture", score: 4 },
+        { label: "Could describe it in detail right now", score: 5 },
       ]
     },
   ];
 
-  // State
+  // ── Explanation Library ──
+  // Keyed by question number (1–15) then by score value.
+  const explanations = {
+    1: {
+      5: "Your financials are in the gold standard position, the kind that gives buyers, their lenders, and their advisors the confidence to move quickly and pay full price. Audited or reviewed statements signal that your numbers have been independently verified, which removes one of the biggest sources of deal risk and buyer skepticism. Buyers who see clean, professional financials typically make stronger offers and move faster through due diligence because they're not pricing in the uncertainty of what they might find. This is a meaningful competitive advantage when you go to market. Most businesses your size don't have it.",
+      3: "Compiled financials prepared by a CPA are solid for most small business transactions in the $3M to $50M revenue range and are what most buyers in this space expect to see. You're in a workable position, though some SBA lenders and institutional buyers may request reviewed or audited statements before they'll finalize financing, particularly for deals above $5M in purchase price. If your timeline to sale is 12 to 24 months, investing in a reviewed engagement now gives you optionality without significant cost. The gap between compiled and reviewed is mostly a matter of verification depth, not a reflection of your business quality.",
+      1: "Internally prepared financials, even well-organized ones, create a credibility problem with buyers and their lenders because there's no independent verification that the numbers are accurate. This doesn't mean a deal can't happen, but it does mean buyers will discount their offer to account for the risk that the numbers could look different once a professional examines them. You'll almost certainly be required to bring in a CPA before a deal closes, and doing that under time pressure during a transaction is significantly more stressful and expensive than doing it proactively now. Getting professional financial statements prepared is one of the highest-ROI investments you can make before going to market.",
+      0: "Disorganized or behind-the-scenes financials are the single most common reason deals fall apart or get repriced dramatically during due diligence. Buyers find surprises, trust erodes, and the price gets cut. Even if the business is genuinely profitable and well-run, a buyer can't pay for what they can't verify, and lenders won't finance what they can't underwrite. Cleaning up the books is not optional if you're serious about a sale. It's the first domino, and everything else in this assessment becomes secondary until it falls. Find a qualified CPA who works with business transactions and make this your immediate priority."
+    },
+    2: {
+      5: "You're one of the minority of business owners who actually knows what they're selling before they try to sell it, and that puts you in a significantly stronger negotiating position. A current valuation gives you a credible anchor to defend your asking price, helps you evaluate offers intelligently rather than emotionally, and signals to buyers that you're a serious, prepared seller. It also helps your advisors structure the deal more effectively because they're working from a shared, defensible baseline rather than guessing. This is exactly the kind of preparation that separates owners who achieve great outcomes from those who leave money on the table or waste months on deals that never close.",
+      3: "Having been through a formal valuation process means you understand how buyers and advisors think about business value, which is genuinely useful context going into a sale. But markets move, multiples shift, and your business has almost certainly changed, which means your old number may be significantly off in either direction. A valuation that's more than 2 to 3 years old is more like a historical reference point than a current price guide, and going to market based on stale numbers risks overpricing yourself out of deals or underpricing a business that's grown substantially. Refreshing the valuation before going to market is a modest investment compared to the cost of mispricing a transaction.",
+      1: "A rough idea of what your business is worth is a starting point and not a strategy. The problem with rough estimates is that they anchor expectations in ways that either produce overpriced, unsellable businesses or underpriced deals that leave real money behind. Buyers and their advisors are working from detailed models and market comparables, and going into that conversation without a professional assessment of your own creates an information asymmetry that rarely works in the seller's favor. A formal valuation, even a preliminary one, is the foundation of an effective exit strategy.",
+      0: "Entering any exit conversation without knowing what your business is worth is the equivalent of selling your house without checking any comparable sales. You're entirely at the mercy of whoever's on the other side of the table. A professionally prepared business valuation can legitimately change your expected outcome by hundreds of thousands of dollars or more by giving you the tools to defend your price and evaluate offers intelligently. It also surfaces value-driver gaps, which are areas where targeted improvement before going to market could meaningfully increase what you're paid. Get a professional opinion of value before you have any serious conversation with a buyer, broker, or advisor."
+    },
+    3: {
+      5: "Improving margins are one of the most powerful signals you can send to a prospective buyer, because they suggest the business has pricing power, operational leverage, or cost discipline, or all three. Buyers and their lenders use trailing financial performance to underwrite the purchase price, and a positive trend line gives them confidence that their investment will hold its value post-close. It also gives you negotiating leverage: a business on an improving trajectory can credibly command a multiple that reflects where it's going, not just where it's been. This is the story buyers want to tell their investors or lenders, and your numbers support it.",
+      4: "Consistent margins over three years tell a powerful story of predictability, and predictability is what buyers and their lenders are fundamentally paying for when they acquire a business. A stable margin profile signals that the business is well-managed, that pricing holds, and that cost structures are under control, all of which reduce the perceived risk of the acquisition. While improving margins command the highest premiums, stable margins are genuinely strong and support a full valuation in most markets. The story to tell here is consistency and reliability, which resonates well with both financial buyers and strategic acquirers.",
+      2: "Flat margins, especially when revenue has grown, often signal that cost growth is keeping pace with revenue, which is a question buyers will probe carefully because it may indicate pricing pressure, operational inefficiency, or both. It's not a dealbreaker, but it requires a credible explanation accompanied by a plan, because buyers and their advisors won't leave it unaddressed. If you can articulate why margins have been flat and show what you're doing to improve them, you can often get ahead of the discount a buyer would otherwise apply. If the answer isn't clear, a buyer's advisor will construct their own explanation, and it will be more pessimistic than yours.",
+      0: "Declining margins are the single most common reason buyers either walk away or dramatically reprice a deal, because they raise the fundamental question of whether the business is structurally sound or whether the current owner is the only thing holding it together. A buyer who sees three years of margin compression will either price in the risk aggressively, demand earnout structures that shift the risk back to you, or simply move on to a cleaner opportunity. Before going to market with a declining margin profile, you need a clear-eyed diagnosis of the cause and ideally a credible turnaround already in progress. Going to market without addressing this is likely to produce disappointing results."
+    },
+    4: {
+      5: "The ability of a business to operate without its owner for 60 days is one of the clearest indicators that real enterprise value has been built, not just a high-income job that requires the owner to show up every day. Buyers, especially private equity groups and sophisticated strategic acquirers, are paying for a system that produces cash flow, not for access to the owner's time and relationships. A business that runs easily without you is more financeable, commands a higher multiple, and gives a new owner genuine confidence that the value they're buying will still be there after you leave. This is the result of years of intentional system-building and delegation, and it shows.",
+      3: "Some friction in running the business without you is very common in the $3M to $50M range and isn't disqualifying. It just creates work to do before going to market and may require a longer post-closing transition period. The key question is whether the friction is structural, meaning the business genuinely depends on you, or procedural, meaning there are gaps in systems and documentation that could be filled with time and intention. Procedural friction can be addressed before going to market; structural owner-dependency is harder to solve quickly and often shows up in deal terms as earnouts or extended management agreements. Identifying which type you have is an important early step in your exit preparation.",
+      1: "A business that barely functions without you is, from a buyer's perspective, a high-risk acquisition, because the thing they're paying for is partially dependent on the thing they're not buying. This will show up in several ways: buyers will offer lower prices, require longer transition periods, structure deals with earnouts tied to your ongoing involvement, or pass in favor of businesses with less key-person risk. The good news is that this is fixable with 12 to 24 months of intentional delegation, documentation, and team development, and the return on that investment in terms of what you'll ultimately be paid is often substantial. Start now, before the urgency of a transaction forces the issue.",
+      0: "If the business cannot function without you, what a buyer is acquiring is closer to a job or a book of business than a standalone enterprise, and that distinction matters enormously to what it's worth and who will buy it. Most institutional buyers and SBA-financed transactions require evidence that the business can operate independently, and without it, your buyer pool shrinks dramatically to strategic buyers, family members, or industry insiders who plan to run it themselves. This isn't a permanent condition, but it does mean that exit planning must begin well before you want to sell, not in the year you want to be done. The business you build deliberately over the next 24 months will be worth substantially more than the one you'd sell today."
+    },
+    5: {
+      5: "A strong management team that operates autonomously is one of the most significant value-creation levers available to a business owner preparing for exit, because it directly answers the buyer's most pressing concern: what happens to this business after the owner leaves? When the answer is 'the team runs it,' buyers pay meaningfully more, often a full turn or more of EBITDA in additional multiple, because they're acquiring a scalable, resilient organization rather than a fragile owner-dependent one. Private equity buyers in particular actively seek businesses with existing leadership because it enables them to deploy capital efficiently rather than immediately scrambling to rebuild management capacity. If you have this, make sure it's visible and demonstrable throughout the due diligence process.",
+      3: "Having one strong leader who carries significant operational weight is better than having no management depth, but it introduces a specific risk that buyers call key-person concentration, and it's a risk they'll price and structure around. If that person leaves post-acquisition, either for a better opportunity or because the culture changes under new ownership, the buyer's investment is significantly impaired. Buyers will typically ask about this person's tenure, compensation, equity, and likelihood of staying, and may require retention agreements or deal structure adjustments to protect against their departure. Building a second tier of leadership beneath your key person before going to market meaningfully reduces this risk and directly increases what buyers are willing to pay.",
+      1: "A structure where you make the decisions and a staff executes them is the most common configuration in the small business world, and the one that creates the most friction in a sale process. Buyers can work with this setup, but they'll typically require a longer transition, structure earnouts tied to your involvement, or discount the purchase price to reflect the risk of rebuilding management capacity post-close. Every month you spend developing even one or two team members who can own decisions in their functional area is a month that's directly adding to the enterprise value you'll eventually be paid. This is one of the highest-ROI activities in exit preparation, and it's also one of the most underestimated.",
+      0: "When all decisions run through you, the business is essentially a reflection of your individual judgment and presence, which means what a buyer is acquiring is genuinely uncertain until they figure out what the business looks like without you. This configuration severely limits your exit options, your buyer pool, and your price, and it also means the transition period will be long, costly, and potentially uncomfortable for everyone involved. The path forward isn't complicated, but it does require time: start identifying even one person who could own a meaningful area of the business, document your decision-making process in that area, and give that person real authority to practice with. The business you build over the next 18 to 24 months will be worth substantially more than the one you'd sell today."
+    },
+    6: {
+      5: "When key relationships are institutionalized, tied to your brand, your team, and your processes rather than to your personal phone number, what you've built is genuinely transferable, and buyers know it. This is the difference between selling a business and selling a client list: a business with institutionalized relationships will continue generating revenue under new ownership without requiring the seller to make awkward introduction calls or beg customers to stay. Buyers and their lenders model relationship portability as a key assumption in their acquisition thesis, and strong performance here directly supports your valuation and the financing terms a buyer can access. If you've achieved this, make sure it's clearly documented and demonstrable in your due diligence package.",
+      3: "A mixed picture, where some relationships belong to the company and some belong to you personally, is the most common reality for businesses in your size range, and it's workable but requires planning. The risk is that buyers will identify the personal relationships as the ones most likely to atrite post-sale, and they'll either discount their offer or require deal structures that keep you involved until those relationships transfer. The most effective preparation is to actively transition personal relationships to company relationships before going to market: introduce your team, shift communications to company channels, and make sure your best clients have a compelling reason to stay that isn't solely loyalty to you. Every relationship you successfully institutionalize before going to market is value you're locking in.",
+      1: "When most of your key relationships are personal rather than institutional, a buyer faces a fundamental uncertainty: they're paying for revenue that may or may not survive when you leave. Buyers and their advisors will estimate the probability of customer and vendor attrition and apply a discount accordingly, and that discount is often larger than sellers expect, because buyers tend to be conservative about anything they can't control. The good news is this is addressable with time: start introducing team members into key relationships now, document the nature and history of important accounts, and look for ways to formalize what have been informal arrangements. The goal is to make yourself gradually less central to the relationships your business depends on.",
+      0: "If every meaningful relationship, your top customers, best vendors, and key referral sources, runs through you personally, what you have is closer to a personal services practice than a transferable business, and most buyers won't pay business-level multiples for it. This doesn't mean the business can't be sold, but it does mean the structure of any sale will need to account for significant relationship risk through extended seller involvement, earnouts tied to revenue retention, or a dramatically reduced headline price. The work required to change this is real but achievable: systematically introducing your team into relationships, documenting account histories, and formalizing agreements can shift this picture significantly over 12 to 24 months of deliberate effort before going to market."
+    },
+    7: {
+      5: "Revenue diversification at this level means that no single client departure, for any reason, can materially impair the business, which is exactly the structural resilience buyers and their lenders want to see. Most acquisition financing, including SBA loans, includes covenant provisions around customer concentration, and a profile where your largest client represents less than 10% of revenue clears those thresholds comfortably. This also means you're negotiating from a position of strength. You don't need any single customer to make the business work, and buyers know you're not under revenue pressure that would push you to accept a lower offer. This is a real competitive advantage when you go to market.",
+      3: "Single-client concentration in the 10 to 20% range is within acceptable parameters for most buyers and lenders, but it's worth understanding the specific dynamics of that relationship thoroughly before you go to market. Buyers will ask about contract length, renewal history, pricing stability, and whether the relationship is personal or institutional, and the answers matter as much as the percentage does. If the relationship is strong, documented, and likely to survive a change of ownership, the impact on valuation is minimal; if it's informal or dependent on your personal connection with a decision-maker at that company, it will get priced accordingly. Know the full story behind this number before a buyer asks you to explain it.",
+      1: "Concentration in this range is a yellow flag that most professional buyers will raise in due diligence, because it means a single client departure could reduce revenue by a fifth or more, a scenario that could impair the business's ability to service acquisition debt or maintain profitability post-close. Buyers won't necessarily walk away from a business with this profile, but they will structure around the risk: expect requests for long-term contracts with that customer, earnout provisions tied to their retention, or a purchase price that reflects the downside scenario if that relationship doesn't survive the transition. The most effective mitigation is to actively diversify your revenue base before going to market, even if it means investing in sales capacity now.",
+      0: "When more than a third of your revenue comes from a single source, a buyer is not just acquiring a business. They are acquiring a binary bet on whether that one relationship survives a change of ownership. Most institutional buyers will pass on this profile, and those who engage will structure deals that shift the concentration risk back to you through earnouts, seller notes with performance conditions, or extended transition requirements that keep you exposed to the business long after you wanted to be done. The practical question to sit with is this: what happens to your business if that customer is acquired, cuts the relationship, or simply moves to a competitor? If the answer is 'it would be severely damaged,' diversifying that revenue base is the most important thing you can do before going to market."
+    },
+    8: {
+      5: "Recurring, contracted revenue is the single biggest driver of EBITDA multiple expansion across virtually every industry, because it directly addresses the buyer's most fundamental concern: will the revenue be there next year? When most of your revenue is contracted or subscription-based, a buyer can model their acquisition with significantly higher confidence, access better financing terms, and justify paying a premium multiple because the investment is de-risked at the top line. This is the profile that private equity groups and strategic acquirers actively compete for, which means you're more likely to attract multiple bidders and achieve a price that reflects the full value of what you've built. If you've built a recurring revenue model in an industry where it's not the norm, that differentiation deserves to be highlighted prominently.",
+      3: "A balanced mix of recurring and project-based revenue gives you some of the stability benefits of a contracted model while preserving the upside of transactional work, a reasonable position, though one that leaves value on the table compared to a predominantly recurring profile. Buyers will value the recurring portion of your revenue more generously than the project portion, effectively applying different multiples to different parts of your business when building their offer. If you can shift even 10 to 20% more of your revenue into contracted or retainer arrangements before going to market, the impact on your valuation can be disproportionate to the operational effort involved. Think about which of your current project-based clients could realistically be converted to service agreements.",
+      1: "A predominantly project-based revenue model means each year effectively starts at zero, and buyers know it, which is why they model these businesses conservatively and structure deals to protect against revenue shortfall post-close. The challenge isn't just valuation; it's also financing, because SBA lenders and acquisition lenders are uncomfortable underwriting debt against revenue that has to be re-earned from scratch every year. Earnout structures are common in these acquisitions because they let the buyer pay a higher headline price while tying a portion of proceeds to post-close revenue performance, which creates uncertainty and complexity in the sale process that most sellers find frustrating. If your timeline allows it, investing in recurring revenue conversion before going to market is one of the highest-impact preparation strategies available.",
+      0: "A purely transactional revenue model, where every dollar has to be won fresh and no revenue is contractually committed, is the hardest model to sell because it asks buyers to pay today for revenue they have no certainty of receiving tomorrow. This doesn't make the business unsellable, but it does dramatically constrain your buyer pool, your valuation, and the financing structures available to support a deal. Buyers who engage with this model will typically require significant seller financing or earnout arrangements that keep you financially exposed to the business's post-sale performance, which means the clean exit most sellers want is much harder to achieve. Even converting one or two flagship accounts to retainer or service agreement structures can meaningfully shift this picture."
+    },
+    9: {
+      5: "Written contracts are the legal infrastructure that makes your revenue transferable. They establish that the customer relationship belongs to the business rather than to you personally, and that a new owner has the legal right to continue billing and serving those clients after closing. Most acquisition financing requires evidence of contractual revenue because lenders are underwriting against the cash flow, and cash flow that isn't documented is cash flow they can't count or rely on. A business with mostly contracted customer relationships supports better financing terms, commands higher buyer confidence, and is significantly easier to transfer cleanly. This is one of those preparation items that costs relatively little in legal fees but pays outsized dividends at the negotiating table.",
+      3: "Having contracts in place for some of your customers is better than none, but the uncovered portion of your revenue represents uncertainty that buyers and their lenders will discount, sometimes aggressively, depending on which customers lack agreements. The question to ask is: which customers would be hardest to lose in a transition, and are those the ones with or without contracts? Prioritizing contract execution for your most important and highest-revenue relationships gives you the most protection where it matters most. Working with a business attorney now, before the urgency of a transaction, is significantly less stressful and expensive than trying to execute agreements during due diligence when customers can sense something is happening.",
+      1: "When most of your customer relationships are undocumented, a buyer faces a fundamental question: will these clients stay when you leave, and does the business even have the legal right to continue serving them under new ownership? Buyers in this situation will either price the risk aggressively or require your involvement post-close as a condition of the deal. Neither serves your goal of a clean, well-compensated exit. The fix is straightforward but requires lead time: begin systematically converting your most important accounts to written service agreements, even simple ones, well in advance of any sale process. The investment in legal work now is modest compared to the discount you'll absorb at closing if you don't make it.",
+      0: "Operating without written customer contracts means your revenue is based entirely on goodwill, habit, and personal relationships, all of which are genuinely valuable, but none of which are legally transferable or financeable in a traditional acquisition. Lenders who fund acquisitions are underwriting against documented cash flow, and they simply cannot count revenue they can't verify through executed agreements. Without contracts, your buyer pool shrinks to all-cash buyers willing to accept the full relationship risk, and even those buyers will price that uncertainty into their offer significantly. Converting even your largest and longest-standing accounts to simple written agreements before going to market is one of the most straightforward and high-impact improvements you can make to your exit readiness."
+    },
+    10: {
+      5: "Buyer-ready documentation is one of the clearest signals that a business has been built to last, not just to perform while the current owner is present. When a buyer and their due diligence team can open a data room and find organized, comprehensive documentation of how the business operates, it compresses the timeline, reduces their risk assessment, and gives them confidence to pay a full price rather than applying a discount for operational uncertainty. It also makes the transition smoother and faster, which protects your post-closing proceeds in structures where they're tied to transition performance. This is an area where you're genuinely ahead of most sellers in your market, and it shows.",
+      3: "Being mostly documented is a solid position. It means you've done the hard work of capturing institutional knowledge in written form, even if a few areas remain informal or incomplete. The gaps that typically remain at this stage are the most embedded ones: the things you do automatically without thinking, vendor relationships managed through personal connection rather than documented process, or informal client communication protocols that exist only in someone's head. Identifying and closing those specific gaps before going to market is the highest-priority documentation work you have remaining. A buyer's due diligence team will find the gaps you don't close first, and they'll price them accordingly.",
+      1: "Scattered documentation, where some things are written down and others exist only in the owner's head or in informal practice, creates real risk in a sale process because buyers have no way to distinguish organized complexity from hidden chaos without digging deep. The response isn't to try to document everything at once, which is impossible under time pressure, but to prioritize ruthlessly: focus on your service delivery processes, key vendor relationships, client onboarding and management protocols, and your organizational chart. A targeted documentation sprint over 60 to 90 days can move you from scattered to mostly complete, which makes a meaningful difference in how buyers perceive the business and what they're willing to pay for it.",
+      0: "A business with no operational documentation is asking a buyer to make an enormous leap of faith: trust that the operation works, that the team can execute without the owner, and that there's a real, transferable business here, all without any written evidence to support those assumptions. Most professional buyers won't make that leap; they'll either pass entirely or offer a price that reflects the risk of what they might find once they're inside. This is fully fixable, but it requires 6 to 12 months of systematic documentation work to reach a defensible level. Start with the processes that would be hardest to reconstruct if a key employee left unexpectedly, because those are the same ones a buyer is most worried about."
+    },
+    11: {
+      5: "When the business represents less than a quarter of your total net worth, you're negotiating from a position of genuine financial independence, and that is one of the most powerful advantages you can have in a sale process. Sellers who don't need the deal to work out financially make better decisions throughout: they can hold out for the right buyer, decline structures that don't serve their interests, and negotiate from confidence rather than from the anxiety of needing a specific outcome. It also means the tax, timing, and deal structure decisions are genuinely optional optimizations rather than financial survival questions. This financial diversification is the result of years of wealth-building outside the business, and it will serve you exceptionally well in whatever exit process you pursue.",
+      4: "Having 25 to 50% of your net worth in the business means the exit matters significantly but doesn't define your financial future entirely, which is a healthy and workable position that gives you real flexibility. You can be selective about buyers, patient about timing, and thoughtful about deal structure without being under existential pressure to close on any particular terms. The important planning work at this level is making sure you understand the gap between your gross sale proceeds and your after-tax, after-advisor-fees take-home, a number that is often 20 to 30% lower than the headline price, and it's the number your financial plan needs to be built around. A financial planner who works with business transitions can help you model this clearly before you enter any sale process.",
+      2: "When the majority of your net worth is concentrated in the business, the sale isn't just a transaction. It's a liquidity event that will fundamentally reshape your financial life, which means the stakes are high and the margin for error is narrow. In this position, deal structure matters enormously: the difference between all cash at closing versus a significant seller note or earnout can mean the difference between financial security and continued exposure to a business you no longer control. You also need to plan carefully for the tax impact, because a poorly structured deal can cost you hundreds of thousands of dollars in avoidable tax. Working with a financial planner and a tax advisor before you engage with any buyers is not optional at this level of concentration.",
+      0: "Having over 75% of your total net worth tied up in the business means you're carrying a level of concentration risk that most financial advisors would consider a serious concern regardless of how strong the business is, because business value can change quickly due to market conditions, key employee departures, or industry disruption. More immediately, it means the pressure to close successfully is enormous, and that pressure causes sellers to make concessions they later regret: accepting a lower price, agreeing to unfavorable earnout structures, or rushing a process that should take longer. Before you begin any exit process, work with a financial planner to understand exactly what you need from this transaction to achieve financial independence. Knowing your number is the single most important piece of information you can have going into a negotiation."
+    },
+    12: {
+      0: "That's one of the most honest answers you can give in this assessment, and honesty here matters more than you might think, because emotional unreadiness is the most common hidden variable in failed and derailed exits. Owners who aren't emotionally ready often find unconscious ways to sabotage a process they've consciously decided to begin: they price too high, find fault with every buyer, delay decisions, or withdraw from deals at the finish line for reasons they can't quite articulate. The work required isn't financial or operational. It's the identity work of understanding who you are when you're not 'the owner,' and what gives your life meaning and structure in the chapter that follows. This is exactly the kind of work that exit planning done right addresses directly, and it's where an advisor focused on the whole picture can add the most value.",
+      1: "The hesitation you're feeling almost always points to something specific, an unresolved question about identity, income security, purpose, or relationships, rather than a general opposition to selling. Naming that specific concern is more productive than trying to push past it, because unresolved hesitations don't disappear during a transaction process. They intensify under the stress and uncertainty of due diligence and negotiation. Sellers who enter a transaction with significant emotional hesitation often find that the pressure of the process surfaces those concerns at the worst possible moments, sometimes derailing deals that were otherwise going well. The most valuable thing you can do right now is identify exactly what's holding you back and address it directly, ideally with someone who understands both the financial and the human side of an exit.",
+      2: "Being somewhat ready means you're genuinely open to the idea of selling and have started to process what that transition means, but you're not yet at the point where you've fully worked through the emotional implications of letting go of something you've built and defined yourself by for years. This is actually a productive place to be if you use the time wisely: the owners who transition most successfully are those who do the identity and life-planning work during the preparation phase, so that by the time they enter a transaction process, they're running toward their next chapter rather than reluctantly leaving the current one. Using this period to get clear on your post-sale vision, discuss the transition with your partner, and build a financial plan for what comes next will pay dividends throughout the entire process.",
+      3: "Moderate readiness means you've done real emotional work and you're approaching the decision with clarity rather than urgency or avoidance, which puts you ahead of most sellers at this stage. Owners at this level typically make better decisions throughout the process: they evaluate buyers more objectively, negotiate more effectively, and hold up better under the stress of due diligence because they're not emotionally reactive to every twist in the road. The remaining work is usually about specificity: getting clear on exactly what you're moving toward, ensuring your partner is fully aligned, and having a financial plan that gives you genuine confidence in what life after the business actually looks like day to day. Those final pieces of clarity tend to convert moderate readiness into full readiness faster than you'd expect.",
+      4: "Being mostly ready is a strong position. It means you've processed the major emotional and identity questions that derail so many business exits, and you're approaching this transition as a deliberate chapter change rather than a loss. The small remaining hesitations are normal and shouldn't be interpreted as a signal to delay; in most cases they resolve naturally as the planning process gets more concrete and the path forward becomes clearer and more real. Sellers at this level of readiness consistently navigate the transaction process well and report high satisfaction with their outcomes, both because they're making clear-headed decisions and because they have a genuine sense of what they're walking toward. You're in a good position to begin serious planning now.",
+      5: "Complete emotional readiness is rarer than most sellers realize. It requires having genuinely processed the identity shift, built a compelling vision for what comes next, and reached the point where selling feels like an act of intention rather than a response to exhaustion or market timing. Sellers at this level consistently achieve better outcomes, not because the business is necessarily stronger, but because they negotiate from clarity and confidence, they attract buyers who sense that confidence, and they're able to make level-headed decisions under the pressure that defines a successful exit. This is the mindset to protect throughout the process. Stay connected to why you're doing this and what you're moving toward, and don't let the inevitable stresses of due diligence pull you off center."
+    },
+    13: {
+      0: "The absence of this conversation is one of the most common and consequential gaps in exit preparation, and the one that surprises sellers most when it becomes a problem late in the process. Spouses and partners who haven't been part of the planning often surface concerns, objections, or entirely different visions for post-sale life at exactly the moment when those concerns are hardest to address, which is during an active transaction. It doesn't have to be a perfect conversation, but it does need to happen well before any formal sale process begins, because the deeper the partnership, the more important it is that the exit feels like a shared decision rather than something that's happening to one person. Starting that conversation now, with the help of an advisor who can facilitate it constructively, is one of the highest-value things you can do at this stage.",
+      1: "Brief mentions are better than silence, but they rarely surface the real substance of the conversation, which includes the concerns about income replacement, daily structure, purpose, identity, and the specific shape of a shared life after the business. Many couples who've mentioned it briefly discover, when they go deeper, that they have significantly different assumptions about how they'll spend their time, where they might live, what financial security feels like, or how involved the seller will want to remain with professional activity post-close. Those differences aren't dealbreakers, but they're much easier to work through before a transaction than during one when everyone is under pressure. Schedule a real conversation and be willing to sit with the complexity of what genuinely comes up.",
+      2: "Having had some conversations is meaningful progress, and it suggests that both of you have at least the broad outlines of the transition in view. The work at this stage is to go deeper on the specifics: not just 'we're generally aligned on selling' but 'here's what Tuesday looks like in month three, here's how we're thinking about income and spending, here's what we each need to feel purposeful and connected.' Couples who've had some conversations but haven't gotten specific often discover gaps in expectations that are easy to address if caught early and much harder to navigate under the time pressure of an active sale. The more aligned you are on the details before you engage a buyer, the better the process will go for both of you.",
+      3: "Serious conversations about post-sale life goals are one of the most valuable investments a couple can make in exit preparation, because they surface the real concerns, expectations, and aspirations that drive decision-making throughout the process. At this level, you've likely identified both the areas of strong alignment and the places where you have different assumptions or priorities, and the fact that you've had those conversations means you have a foundation to build on rather than a minefield to navigate during the deal. The next step is usually getting specific about the financial plan: what does 'enough' actually feel like, what does the first year of daily structure look like, and what are the specific things each of you is most looking forward to in the next chapter?",
+      4: "Being mostly aligned with your partner on post-sale goals is a meaningful strength. It means the two of you are operating from a shared picture of the future rather than two separate ones that haven't been compared yet. Small remaining differences in expectation are normal and workable, especially when they've been surfaced through real conversation rather than assumed away. Sellers who enter a transaction process with this level of partner alignment consistently report that it helps them stay grounded during the uncertainty and stress of due diligence, because they're clear on what they're doing and why, and they have someone beside them who shares that clarity. Protect and continue to develop that alignment as you move deeper into the planning and transaction process.",
+      5: "Complete alignment with your partner on post-sale life goals is one of the most underappreciated advantages a seller can have, and it's more rare than it sounds, because true alignment requires honest conversations about identity, purpose, daily structure, financial security, and the specific shape of a shared future, not just agreement that selling is a good idea in the abstract. Couples who have achieved this level of alignment navigate the exit process with noticeably less stress, make better decisions under pressure, and report higher satisfaction with their outcomes on both the financial and personal dimensions. This is the result of real work, which is time spent talking honestly about what matters most to each of you, and it will serve you well throughout the entire process and long after closing."
+    },
+    14: {
+      0: "The absence of a post-sale vision is more significant than it might appear on the surface, because without something concrete to move toward, the business tends to remain a psychological anchor, a source of identity, structure, and purpose that makes it genuinely difficult to let go even when the financial terms are exactly right. Many sellers who lack a clear vision find themselves unconsciously prolonging or complicating the exit process because, at some level, they're not sure what they're doing on the other side of it. The work isn't to manufacture enthusiasm for retirement; it's to genuinely explore what matters most to you, what problems you want to solve next, and how you want to spend the time you're about to get back. That clarity is worth building before you enter any serious sale conversation.",
+      1: "'Travel more' and 'spend more time with family' are among the most common post-sale visions sellers articulate, and they're genuinely good things, but they're not a vision, and they tend to fill the first few weeks before leaving owners feeling surprisingly empty. The owners who struggle most post-exit are those who underestimated how much structure, purpose, intellectual stimulation, and sense of contribution the business was providing every single day. The work at this stage is to get specific: not just 'travel' but where, with whom, and what you'd want to learn or experience. Not just 'family time' but what that actually looks like and what role you want to play. The more specific you make the picture, the more real and achievable it becomes.",
+      2: "Having some general ideas is a genuine starting point, and it means you've begun the important work of imagining life on the other side rather than just the transaction itself. The next step is commitment and specificity, which means moving from 'I've thought about some things' to 'here's what I'm actually going to do and what it will feel like in month three.' It helps to think in concrete terms: what does a Tuesday look like in six months? Who are the people you'll spend the most time with? What's the first major thing you want to accomplish that the business has been preventing? The more specific you can make the picture, the more it functions as an actual destination rather than a vague aspiration.",
+      3: "A moderately clear vision means you can see the shape of what's next even if the details aren't fully defined, which is a healthy and workable position at this stage of the process. The clarity you have now gives you enough of a destination to negotiate confidently and to approach the exit as a beginning rather than an ending, without locking you into a plan so specific it can't adapt to what post-sale life actually brings. The work at this stage is to continue filling in the picture: have more conversations with your partner about the specifics, spend time with people who've already made this transition successfully, and make sure your financial plan supports the life you're envisioning rather than just the account balance.",
+      4: "Having a mostly clear post-sale vision means you've done the kind of life-planning work that most business owners never get around to, which is one of the reasons so many sellers struggle with the transition even when the financial outcome is good. You've given yourself a real destination, which means the exit isn't the end of the story but a deliberate transition between chapters. The remaining work is typically about the first 90 days in particular: having a specific, intentional structure for the period immediately after closing is the best defense against the 'now what?' feeling that catches even well-prepared sellers off guard. Make sure you have real commitments, whether travel, projects, relationships, or roles, that start immediately rather than something you drift into.",
+      5: "A completely clear post-sale vision is one of the most valuable assets you can bring to an exit process, and it's far rarer than financial or operational preparedness. It means you've done the deep work of understanding what gives your life meaning beyond the business you've built, and that you're leaving with genuine intention rather than exhaustion or market timing. Sellers with this level of clarity tend to be better negotiators because they know what they need, calmer through due diligence because they're not afraid of the outcome, and more satisfied post-close because they're walking toward something real and specific. Protect this clarity throughout the process. When the deal gets stressful, coming back to why you're doing this and what you're building toward is what will keep you grounded."
+    },
+    15: {
+      0: "The inability to picture a specific day after the sale is one of the most telling signals in this entire assessment, more so than many of the financial or operational questions, because it reveals that the business is providing something irreplaceable in your current life that you haven't yet figured out how to replace. That something is usually a combination of structure, identity, purpose, relationships, and the daily satisfaction of solving meaningful problems and leading people who depend on you. It's not a character flaw; it's an honest acknowledgment that the transition requires real preparation, not just financial readiness. The work here is to begin building the architecture of what that next chapter actually looks like, starting with the small, concrete questions about how you'll structure your time, who you'll spend it with, and what problem you'll be working on next.",
+      1: "A vague sense of post-sale life is common for owners who are still primarily focused on running the business today rather than designing the chapter that comes next, which is understandable, but it does mean there's a real gap between where you are and where you need to be emotionally before an exit goes smoothly. Sellers who enter a transaction with only a vague sense of what's next often find that the closing date, which they anticipated as a relief, arrives with a surprising weight, because the structure, purpose, and daily meaning the business provided disappears all at once rather than gradually. Building specificity now, not as a rigid plan but as a genuine vision of how you'll spend your time, is the most important life-planning work you have in front of you before going to market.",
+      2: "Having some general activities in mind is a meaningful starting point, and it indicates you've begun thinking concretely about the transition rather than just abstractly about 'the future after the sale.' The gap between general activities and a real, sustainable day is usually about commitment and specificity: 'I'll probably travel and maybe get involved in some advisory work' becomes real when you've booked the trip and had the first advisory conversation. Think about the rhythm of your current week, the structure, the relationships, the daily sense of accomplishment, and ask yourself honestly what in your post-sale life will provide each of those things. The answers to that question will help you move from general activities to a specific and genuinely fulfilling daily life.",
+      3: "A fairly clear picture of day one suggests you've done genuine thinking about the transition, not just the transaction, which puts you significantly ahead of most sellers. You know roughly who you'll be with, what you'll be doing, and how the day will feel, which means the closing date represents a real beginning rather than just an end. The work at this level is to stress-test the picture: does it sustain through week two and week four, or does it rely on a honeymoon period of celebration and travel that eventually runs out? Making sure the picture extends through the full first month rather than just the first few days is the difference between a transition that goes smoothly and one that hits an unexpected wall around week three.",
+      4: "A detailed picture of your first month post-close means you've done the psychological work that most sellers either skip or defer until after the fact, and the payoff for that work is a transition that feels intentional rather than disorienting. Sellers who know specifically where they'll be, who they'll be with, and what they'll be building toward are far less likely to experience the identity crisis or the quiet regret that affects a surprising percentage of business owners after a sale, even very successful ones. The detail you have isn't just emotional preparation. It also signals to buyers, through your demeanor and decision-making throughout the process, that you're a committed seller who won't pull back at the finish line, which actually helps you achieve better deals and cleaner closings.",
+      5: "The ability to describe your first month post-close in specific, confident detail is the highest form of exit readiness. It means the sale isn't something happening to you but a deliberate step in a story you're actively and intentionally writing. You've done the work that most business owners never do: you've separated your identity from your business, built a compelling vision for what comes next, and gotten specific enough about the day-to-day that the transition feels real and achievable rather than hypothetical. Sellers at this level of preparation consistently report the highest satisfaction with their exit outcomes, not just financially but personally, because they walked away toward something rather than from something. That distinction is everything."
+    }
+  };
+
+  // ── State ──
   let current = 0;
   let answers = new Array(questions.length).fill(null);
 
-  // Shuffle option display order once per session (Fisher-Yates)
-  // Answers are stored by original index so back-navigation is stable
+  // Shuffle option display order once per session (Fisher-Yates).
+  // noShuffle questions (Likert scales) and routing question keep original order.
   const shuffledOrders = questions.map(q => {
     const indices = q.options.map((_, i) => i);
+    if (q.noShuffle || q.isRouting) return indices;
     for (let i = indices.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [indices[i], indices[j]] = [indices[j], indices[i]];
     }
     return indices;
   });
+
+  function isNoPartner() {
+    if (!answers[11]) return false;
+    const opt = questions[11].options[answers[11].origIdx];
+    return opt.noPartner === true;
+  }
 
   function startAssessment() {
     document.getElementById('intro-screen').style.display = 'none';
@@ -964,7 +1021,10 @@
 
   function renderQuestion() {
     const q = questions[current];
-    document.getElementById('q-pillar').textContent = `Pillar ${q.pillar} — ${q.pillarName}`;
+    const pillarLabel = q.isRouting
+      ? `Pillar 3 — ${q.pillarName}`
+      : `Pillar ${q.pillar} — ${q.pillarName}`;
+    document.getElementById('q-pillar').textContent = pillarLabel;
     document.getElementById('q-text').textContent = q.text;
 
     const optList = document.getElementById('q-options');
@@ -983,18 +1043,12 @@
       optList.appendChild(li);
     });
 
-    // back button
     document.getElementById('btn-back').style.visibility = current === 0 ? 'hidden' : 'visible';
 
-    // next button state
     const nextBtn = document.getElementById('btn-next');
     const isLast = current === questions.length - 1;
     nextBtn.textContent = isLast ? 'See My Results' : 'Continue';
-    if (answers[current] !== null) {
-      nextBtn.classList.add('enabled');
-    } else {
-      nextBtn.classList.remove('enabled');
-    }
+    nextBtn.classList.toggle('enabled', answers[current] !== null);
 
     updateProgress();
   }
@@ -1002,11 +1056,12 @@
   function selectOption(origIdx) {
     const q = questions[current];
     const opt = q.options[origIdx];
-    const noPartner = opt.score === -1;
-    const score = noPartner ? 5 : opt.score;
-    answers[current] = { origIdx, score, noPartner };
+    answers[current] = {
+      origIdx,
+      score: q.isRouting ? 0 : opt.score,
+      noPartner: opt.noPartner === true
+    };
 
-    // Find which display position corresponds to this original index
     const displayPos = shuffledOrders[current].indexOf(origIdx);
     document.querySelectorAll('.option-btn').forEach((b, i) => {
       b.classList.toggle('selected', i === displayPos);
@@ -1018,7 +1073,10 @@
   function nextQuestion() {
     if (answers[current] === null) return;
     if (current < questions.length - 1) {
-      current++;
+      let next = current + 1;
+      // Skip Q13 (index 13) if no partner selected at routing question
+      if (next === 13 && isNoPartner()) next = 14;
+      current = next;
       renderQuestion();
     } else {
       showEmailGate();
@@ -1027,16 +1085,24 @@
 
   function prevQuestion() {
     if (current > 0) {
-      current--;
+      let prev = current - 1;
+      // Skip Q13 (index 13) backward if no partner selected
+      if (prev === 13 && isNoPartner()) prev = 12;
+      current = prev;
       renderQuestion();
     }
   }
 
   function updateProgress() {
-    const total = questions.length;
-    const pct = ((current + 1) / total) * 100;
+    const noPartner = isNoPartner();
+    const effectiveTotal = noPartner ? questions.length - 1 : questions.length;
+    // Adjust current position for skipped Q13
+    const effectiveCurrent = (noPartner && current >= 14) ? current - 1 : current;
+    const pct = ((effectiveCurrent + 1) / effectiveTotal) * 100;
+
     document.getElementById('progress-fill').style.width = pct + '%';
-    document.getElementById('progress-count').textContent = `Question ${current + 1} of ${total}`;
+    document.getElementById('progress-count').textContent =
+      `Question ${effectiveCurrent + 1} of ${effectiveTotal}`;
 
     const pillar = questions[current].pillar;
     ['pl-1','pl-2','pl-3'].forEach((id, i) => {
@@ -1047,7 +1113,6 @@
     });
   }
 
-  // ── Email Gate ──
   function showEmailGate() {
     document.getElementById('question-screen').style.display = 'none';
     document.getElementById('progress-wrap').style.display = 'none';
@@ -1055,51 +1120,44 @@
   }
 
   function submitEmail() {
-    const email = document.getElementById('email-input').value.trim();
-    // Basic validation — just proceed regardless (email is optional)
     showResults();
   }
 
   // ── Scoring ──
-  // Pillar 1: indices 0–4   (5 q × 5 = 25 max)
-  // Pillar 2: indices 5–13  (9 q × 5 = 45 max)
-  // Pillar 3: indices 14–19 (6 q × 5 = 30 max; no-partner at 15 may be excluded)
-  // Weighted overall: P1 30% + P2 45% + P3 25%
+  // P1: indices 0–2  (max 15)
+  // P2: indices 3–10 (max 40)
+  // P3: indices 12–15 (max 20, or 15 if no partner — Q13 excluded)
+  // Index 11 = routing question (not scored)
+  // Overall = round(totalRaw / totalMax * 100)
   function computeResults() {
-    let p1raw = 0, p1max = 25;
-    let p2raw = 0, p2max = 45;
-    let p3raw = 0, p3max = 30;
+    const noPartner = isNoPartner();
+    let p1raw = 0, p2raw = 0, p3raw = 0;
+    const p1max = 15, p2max = 40;
+    const p3max = noPartner ? 15 : 20;
 
-    // Pillar 1
-    for (let i = 0; i < 5; i++) { if (answers[i]) p1raw += answers[i].score; }
-
-    // Pillar 2 (indices 5–13)
-    for (let i = 5; i < 14; i++) {
+    for (let i = 0; i < 3; i++) {
+      if (answers[i]) p1raw += answers[i].score;
+    }
+    for (let i = 3; i < 11; i++) {
       if (answers[i]) p2raw += answers[i].score;
     }
 
-    // Pillar 3 (indices 14–19; no-partner at 15 uses noPartner flag)
-    for (let i = 14; i < 20; i++) {
-      if (answers[i]) {
-        if (answers[i].noPartner) { p3max -= 5; }
-        else { p3raw += answers[i].score; }
-      }
+    const p3Indices = noPartner ? [12, 14, 15] : [12, 13, 14, 15];
+    for (const i of p3Indices) {
+      if (answers[i]) p3raw += answers[i].score;
     }
+
+    const totalRaw = p1raw + p2raw + p3raw;
+    const totalMax = noPartner ? 70 : 75;
+    const overall = Math.min(100, Math.round((totalRaw / totalMax) * 100));
 
     const p1pct = Math.round((p1raw / p1max) * 100);
     const p2pct = Math.round((p2raw / p2max) * 100);
-    const p3pct = p3max > 0 ? Math.round((p3raw / p3max) * 100) : 100;
+    const p3pct = Math.round((p3raw / p3max) * 100);
 
-    // Weighted overall score: 30% financial, 45% business, 25% life planning
-    const overall = Math.min(100, Math.round(p1pct * 0.30 + p2pct * 0.45 + p3pct * 0.25));
-
-    // Pillar 3 binary check — core psychological questions only (indices 14–18, not exit path)
-    const p3CoreQuestions = [14, 15, 16, 17, 18];
-    const p3allZero = p3CoreQuestions.every(i => {
-      if (!answers[i]) return true;
-      if (answers[i].noPartner) return false;
-      return answers[i].score === 0;
-    });
+    // Pillar 3 binary check
+    const p3Scores = p3Indices.map(i => (answers[i] ? answers[i].score : 0));
+    const p3allZero = p3Scores.every(s => s === 0);
 
     const pillarPcts = [
       { name: "Financial Readiness", pct: p1pct, raw: p1raw, max: p1max },
@@ -1109,42 +1167,29 @@
 
     const minPct = Math.min(...pillarPcts.map(p => p.pct));
     const focusIdx = pillarPcts.findIndex(p => p.pct === minPct);
-    const ready = overall >= 75 && !p3allZero;
+    const ready = overall >= 71 && !p3allZero;
 
-    return { overall, pillarPcts, focusIdx, ready, p3allZero };
+    return { overall, pillarPcts, focusIdx, ready, p3allZero, totalRaw, totalMax };
   }
 
-  // ── Low-score focus suggestions ──
   const focusSuggestions = {
-    0: [ // Financial Readiness
+    0: [
       "Have your financials compiled, reviewed, or audited by a CPA — buyers expect clean books going back 3 years.",
       "Commission a formal business valuation from a qualified appraiser before going to market.",
-      "Identify the drivers behind any margin decline and build a 12-month plan to stabilize or improve them.",
+      "Identify the drivers behind any margin pressure and build a plan to stabilize or improve profitability before you list.",
     ],
-    1: [ // Business Composition
+    1: [
       "Start delegating key decisions to a manager or leadership team — buyer confidence depends on the business running without you.",
       "Convert informal client and vendor relationships into documented, transferable agreements.",
-      "Reduce customer concentration: no single client should represent more than 20% of revenue, and audit vendor dependency just as carefully.",
+      "Reduce customer concentration: no single client should represent more than 20% of revenue.",
       "Build out SOPs, an org chart, and a contracts binder — documentation is due-diligence gold.",
     ],
-    2: [ // Life Planning
+    2: [
       "Spend real time — not just a few minutes — on who you are outside of this business. A financial exit is also a personal transition.",
-      "Have the conversation with your partner about what 'after' looks like. Alignment here prevents major surprises post-close.",
+      "Have the conversation with your partner about what life after the sale actually looks like. Alignment here prevents major surprises post-close.",
       "Build a specific, concrete picture of the chapter after the sale. Vague plans lead to seller's remorse.",
-      "Start thinking about the type of exit that fits your goals — family transition, a strategic buyer, private equity, or something else entirely. Knowing what you want shapes everything from timing to deal structure.",
     ]
   };
-
-  function getLowestScoringQuestions() {
-    // Find 2-3 questions with lowest scores (absolute, not pct)
-    const scored = answers.map((a, i) => ({
-      q: i,
-      score: a ? a.score : 0,
-      maxScore: questions[i].options[0].score, // highest option score
-    }));
-    scored.sort((a, b) => (a.score / a.maxScore) - (b.score / b.maxScore));
-    return scored.slice(0, 3);
-  }
 
   function showResults() {
     document.getElementById('email-screen').style.display = 'none';
@@ -1153,7 +1198,6 @@
 
     const { overall, pillarPcts, focusIdx, ready, p3allZero } = computeResults();
 
-    // Score ring animation
     document.getElementById('score-display').textContent = overall;
     const circumference = 439.82;
     const offset = circumference - (overall / 100) * circumference;
@@ -1161,7 +1205,6 @@
       document.getElementById('score-ring').style.strokeDashoffset = offset;
     }, 100);
 
-    // Headline
     if (ready) {
       document.getElementById('results-headline').textContent = "Your results suggest strong exit readiness.";
       document.getElementById('results-subhead').textContent = "Your business shows meaningful indicators of transferable value and personal readiness.";
@@ -1173,7 +1216,6 @@
       document.getElementById('results-subhead').textContent = "There are meaningful steps you can take now to increase your exit readiness and your eventual sale price.";
     }
 
-    // Pillar breakdown
     const breakdownEl = document.getElementById('pillar-breakdown');
     breakdownEl.innerHTML = '';
     pillarPcts.forEach((p, i) => {
@@ -1188,23 +1230,19 @@
       breakdownEl.appendChild(card);
     });
 
-    // Focus items (not-ready only)
     const focusEl = document.getElementById('focus-items');
+    let focusHtml = '';
     if (!ready) {
       const suggestions = focusSuggestions[focusIdx];
-      focusEl.innerHTML = `
+      focusHtml += `
         <div class="focus-section">
           <h3>Where to focus first: ${pillarPcts[focusIdx].name}</h3>
           <ul>${suggestions.map(s => `<li>${s}</li>`).join('')}</ul>
         </div>
       `;
-    } else {
-      focusEl.innerHTML = '';
     }
 
-    // Deal-killer flags (always shown)
-    const flagsEl = document.getElementById('focus-items');
-    const flagsHtml = `
+    focusHtml += `
       <div class="focus-section" style="border-left-color: var(--sage); margin-top: 24px;">
         <h3 style="color: var(--teal);">Before you go to market — verify these</h3>
         <p style="font-size:0.9rem; color:var(--muted); margin-bottom:16px;">These items don't appear in your score, but any one of them can slow or kill a deal during due diligence.</p>
@@ -1215,13 +1253,8 @@
         </ul>
       </div>
     `;
-    if (!ready) {
-      flagsEl.innerHTML += flagsHtml;
-    } else {
-      flagsEl.innerHTML = flagsHtml;
-    }
+    focusEl.innerHTML = focusHtml;
 
-    // CTA
     const ctaEl = document.getElementById('cta-block');
     if (ready) {
       ctaEl.innerHTML = `
@@ -1242,6 +1275,146 @@
           <a href="https://www.twopalmsfinancial.com/between-two-palms-newsletter" target="_blank" rel="noopener">Subscribe to Between Two Palms →</a>
         </div>
       `;
+    }
+  }
+
+  // ── PDF Report ──
+  function generateReport() {
+    const { overall, pillarPcts, focusIdx, ready, totalRaw, totalMax } = computeResults();
+    const noPartner = isNoPartner();
+
+    const scoredQuestions = questions.filter(q => !q.isRouting && q.qNum !== null);
+    const p3Indices = noPartner ? [12, 14, 15] : [12, 13, 14, 15];
+    const activeIndices = [...Array(11).keys()].concat(p3Indices);
+
+    function answerRow(qIdx) {
+      const q = questions[qIdx];
+      const a = answers[qIdx];
+      if (!a) return '';
+      const selectedLabel = q.options[a.origIdx].label;
+      const score = a.score;
+      const explanation = (explanations[q.qNum] && explanations[q.qNum][score]) || '';
+      return `
+        <div class="q-block">
+          <div class="q-label">Q${q.qNum} — ${q.pillarName}</div>
+          <div class="q-text">${q.text}</div>
+          <div class="q-answer">Your answer: <strong>${selectedLabel}</strong></div>
+          ${explanation ? `<div class="q-explanation">${explanation}</div>` : ''}
+        </div>
+      `;
+    }
+
+    const p1Rows = [0,1,2].map(answerRow).join('');
+    const p2Rows = [3,4,5,6,7,8,9,10].map(answerRow).join('');
+    const p3Rows = p3Indices.map(answerRow).join('');
+
+    const pillarHtml = pillarPcts.map((p, i) => `
+      <div class="pillar-stat ${i === focusIdx ? 'focus' : ''}">
+        <div class="pillar-name">${p.name}</div>
+        <div class="pillar-pct">${p.pct}%</div>
+        <div class="pillar-bar"><div class="pillar-bar-fill" style="width:${p.pct}%"></div></div>
+        ${i === focusIdx ? '<div class="focus-badge">Focus Area</div>' : ''}
+      </div>
+    `).join('');
+
+    const reportHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Exit Readiness Report — Two Palms Financial</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Cormorant Garamond', Georgia, serif; color: #1E2E33; background: #fff; font-size: 14px; line-height: 1.65; }
+  .page { max-width: 720px; margin: 0 auto; padding: 48px 40px; }
+  .logo { text-align: center; margin-bottom: 40px; }
+  .logo-text { font-size: 1.4rem; font-weight: 600; color: #2A424A; letter-spacing: 0.05em; }
+  h1 { font-size: 2rem; font-weight: 600; color: #2A424A; text-align: center; margin-bottom: 6px; }
+  .score-label { text-align: center; font-size: 0.85rem; color: #6B8A82; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+  .score-big { text-align: center; font-size: 4rem; font-weight: 700; color: #2A424A; line-height: 1; margin-bottom: 8px; }
+  .result-tag { text-align: center; font-size: 1rem; color: #6B8A82; margin-bottom: 36px; }
+  .divider { border: none; border-top: 1px solid #D4E0DC; margin: 32px 0; }
+  .section-title { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: #8CA89F; margin-bottom: 20px; font-weight: 600; }
+  .pillars { display: flex; gap: 16px; margin-bottom: 16px; }
+  .pillar-stat { flex: 1; padding: 16px; background: #F3F7F5; border: 1px solid #D4E0DC; border-radius: 4px; }
+  .pillar-stat.focus { border-top: 3px solid #2A424A; }
+  .pillar-name { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.07em; color: #6B8A82; margin-bottom: 6px; }
+  .pillar-pct { font-size: 1.6rem; font-weight: 600; color: #2A424A; margin-bottom: 6px; }
+  .pillar-bar { height: 4px; background: #D4E0DC; border-radius: 2px; margin-bottom: 8px; }
+  .pillar-bar-fill { height: 100%; background: #8CA89F; border-radius: 2px; }
+  .pillar-stat.focus .pillar-bar-fill { background: #2A424A; }
+  .focus-badge { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; background: #2A424A; color: #fff; padding: 2px 7px; border-radius: 2px; display: inline-block; }
+  .pillar-section { margin-bottom: 40px; }
+  .pillar-header { font-size: 1.1rem; font-weight: 600; color: #2A424A; border-bottom: 2px solid #8CA89F; padding-bottom: 8px; margin-bottom: 20px; }
+  .q-block { margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid #D4E0DC; }
+  .q-block:last-child { border-bottom: none; }
+  .q-label { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: #8CA89F; margin-bottom: 4px; }
+  .q-text { font-size: 1rem; font-weight: 600; color: #2A424A; margin-bottom: 8px; line-height: 1.35; }
+  .q-answer { font-size: 0.9rem; color: #2A424A; background: #EAF0EE; padding: 8px 12px; border-radius: 3px; margin-bottom: 12px; display: inline-block; }
+  .q-explanation { font-size: 0.88rem; color: #4A6068; line-height: 1.7; }
+  .cta-block { background: #2A424A; color: #fff; padding: 28px 24px; border-radius: 6px; text-align: center; margin-top: 36px; }
+  .cta-block h3 { font-size: 1.2rem; font-weight: 500; margin-bottom: 8px; }
+  .cta-block p { font-size: 0.88rem; opacity: 0.85; margin-bottom: 16px; }
+  .cta-block a { color: #8CA89F; font-weight: 600; }
+  .disclaimer-box { margin-top: 32px; padding: 16px; border: 1px solid #D4E0DC; border-radius: 4px; }
+  .disclaimer-box p { font-size: 0.72rem; color: #6B8A82; line-height: 1.7; }
+  @media print {
+    .page { padding: 24px 28px; }
+    .pillar-section { page-break-inside: avoid; }
+    .q-block { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="logo">
+    <div class="logo-text">Two Palms Financial</div>
+  </div>
+
+  <div class="score-label">Exit Readiness Score</div>
+  <div class="score-big">${overall}</div>
+  <div class="result-tag">${overall >= 71 ? 'Strong Exit Readiness' : overall >= 50 ? 'Building Toward Readiness' : 'Early-Stage Preparation'} &nbsp;·&nbsp; ${totalRaw} of ${totalMax} points</div>
+
+  <div class="section-title">Pillar Breakdown</div>
+  <div class="pillars">${pillarHtml}</div>
+
+  <hr class="divider"/>
+
+  <div class="pillar-section">
+    <div class="pillar-header">Pillar 1 — Financial Readiness</div>
+    ${p1Rows}
+  </div>
+
+  <div class="pillar-section">
+    <div class="pillar-header">Pillar 2 — Business Composition &amp; Transferable Value</div>
+    ${p2Rows}
+  </div>
+
+  <div class="pillar-section">
+    <div class="pillar-header">Pillar 3 — Life Planning &amp; Psychological Readiness</div>
+    ${p3Rows}
+  </div>
+
+  <div class="cta-block">
+    <h3>Ready to talk through your results?</h3>
+    <p>A complimentary conversation — no pressure, no sales pitch. Just a candid discussion about what your score means for your exit timeline and options.</p>
+    <p><a href="https://calendly.com/twopalms/consultation" target="_blank">Book a Complimentary Zoom Call →</a></p>
+    <p style="margin-top:12px; font-size:0.8rem; opacity:0.65;">Or subscribe to our newsletter: <a href="https://www.twopalmsfinancial.com/between-two-palms-newsletter" target="_blank">Between Two Palms</a></p>
+  </div>
+
+  <div class="disclaimer-box">
+    <p>This assessment is for educational purposes only and does not constitute financial, legal, or investment advice. Results are a directional indicator only and do not reflect the actual market value, saleability, or financial condition of any business. Two Palms Financial is a registered investment adviser. Use of this tool does not establish an advisory relationship.</p>
+  </div>
+</div>
+</body>
+</html>`;
+
+    const win = window.open('', '_blank');
+    if (win) {
+      win.document.write(reportHtml);
+      win.document.close();
+    } else {
+      alert('Please allow pop-ups to download your report, then click the button again.');
     }
   }
 </script>

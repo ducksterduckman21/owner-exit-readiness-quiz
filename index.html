@@ -401,7 +401,7 @@ function showResults() {
 
   const cta = document.getElementById('cta-block');
   if (ready) {
-    cta.innerHTML = '<h3>You\'re ready to have the conversation.</h3><div class="cta-links"><a class="cta-link" href="https://calendly.com/twopalms/consultation" target="_blank" rel="noopener">Let\'s talk. Book a complimentary Zoom call.</a><a class="cta-link" href="https://calendly.com/twopalms/consultation" target="_blank" rel="noopener">Local to Orange County? Let\'s grab coffee.</a></div>';
+    cta.innerHTML = '<h3>You\'re ready to have the conversation.</h3><div class="cta-links"><a class="cta-link" href="https://calendly.com/twopalms/consultation" target="_blank" rel="noopener">Let\'s talk. Book a complimentary Zoom call.</a><a class="cta-link" href="https://calendly.com/twopalms/local-coffee-chat" target="_blank" rel="noopener">Local to Orange County? Let\'s grab coffee.</a></div>';
   } else {
     cta.innerHTML = '<h3>Build toward a stronger exit.</h3><div class="cta-links"><a class="cta-link secondary" href="https://www.twopalmsfinancial.com/between-two-palms-newsletter" target="_blank" rel="noopener">Get weekly insights on exit planning. Subscribe to our newsletter.</a></div>';
   }
@@ -510,7 +510,7 @@ function buildReportHTML() {
         ${exp ? `<div style="color:#333;font-size:12px;line-height:1.6;">${exp}</div>` : ''}
       </div>`;
     }).join('');
-    return `<div style="${gi > 0 ? 'page-break-before:always;padding-top:40px;' : ''}">
+    return `<div style="${gi > 0 ? 'page-break-before:always;padding-top:60px;' : ''}padding-bottom:60px;">
       <h3 style="color:#2A424A;font-size:15px;border-bottom:2px solid #8CA89F;padding-bottom:6px;margin-bottom:20px;">${g.name}</h3>
       ${qs}
     </div>`;

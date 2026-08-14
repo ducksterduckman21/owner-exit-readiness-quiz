@@ -499,6 +499,10 @@ function buildReportHTML() {
     { name: 'Pillar 3: Life Planning and Psychological Readiness', indices: [11,12,13,14] }
   ];
 
+  const DISCLOSURE_HTML = `<div style="margin-top:32px;padding:14px 16px;border:1px solid #d0d0d0;border-radius:4px;background:#fafafa;">
+    <p style="font-size:9px;color:#666;line-height:1.55;">Important Disclosure: Two Palms Planning LLC, doing business as Two Palms Financial, is an investment adviser registered with the State of California. This Exit Readiness Assessment is provided for educational and informational purposes only and is based solely on information provided through the questionnaire, which has not been independently verified. The assessment, including any scores, classifications, observations, or suggested areas of focus, is intended only as a general, directional indicator and does not constitute a business valuation, appraisal, or estimate of potential sale proceeds, nor does it constitute individualized investment, financial planning, legal, tax, accounting, or transaction advice. Results are not a guarantee of business value, exit readiness, transaction success, or any other outcome. Completion of the questionnaire, receipt of this assessment, or participation in a complimentary consultation does not create an investment advisory relationship with Two Palms Financial. Advisory services are provided only pursuant to a separate written agreement, as applicable. Business owners should consult appropriately qualified professionals regarding their individual circumstances before making financial, legal, tax, valuation, or transaction decisions.</p>
+  </div>`;
+
   const qBreakdown = groups.map((g, gi) => {
     const qs = g.indices.map(qi => {
       const ans = answers[qi];
@@ -532,9 +536,10 @@ function buildReportHTML() {
       <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#2A424A;font-weight:700;margin-bottom:4px;">Focus Area</div>
       <div style="font-size:13px;color:#333;">${PILLAR_NAMES[focusIdx]} is your lowest-scoring area and the highest-leverage place to focus your preparation.</div>
     </div>
+    ${DISCLOSURE_HTML}
     ${qBreakdown}
     <div style="margin-top:40px;padding-top:24px;border-top:1px solid #e0e0e0;">
-      <p style="font-size:10px;color:#999;line-height:1.5;">This assessment is for educational purposes only and does not constitute financial, legal, or investment advice. Results are a directional indicator only.</p>
+      ${DISCLOSURE_HTML}
     </div>
     <div style="margin-top:24px;padding:20px;background:#f5f5f5;border-radius:6px;">
       <p style="font-size:13px;color:#2A424A;font-weight:700;margin-bottom:8px;">Ready to talk?</p>

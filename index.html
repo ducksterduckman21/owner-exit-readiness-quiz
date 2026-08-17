@@ -520,10 +520,10 @@ function buildReportHTML() {
     </div>`;
   }).join('');
 
-  return `<div style="padding-left:48px;padding-right:48px;font-family:'Ariana','Montserrat',sans-serif;color:#333;background:#fff;max-width:816px;">
+  return `<div style="font-family:'Ariana','Montserrat',sans-serif;color:#333;background:#fff;width:624px;">
 
-    <!-- PAGE 1: Cover page pinned to exactly one PDF page (1056px − 40px top pad = 1016px) -->
-    <div style="height:1016px;padding-top:40px;display:flex;flex-direction:column;">
+    <!-- PAGE 1: Cover — height=864px (content area: 1056px page − 2×96px margins) -->
+    <div style="height:864px;padding-top:24px;display:flex;flex-direction:column;">
       <div style="flex:1;">
         <div style="text-align:center;margin-bottom:28px;">
           <img src="${LOGO_STACKED_B64}" style="width:160px;" alt="Two Palms Financial">
@@ -575,16 +575,19 @@ async function generateReport() {
     const pdf = new jsPDF({ orientation: 'portrait', unit: 'px', format: 'letter' });
     const pageW = pdf.internal.pageSize.getWidth();
     const pageH = pdf.internal.pageSize.getHeight();
-    const canvas = await html2canvas(container, { scale: 2, useCORS: true, backgroundColor: '#ffffff', width: 816 });
+    const margin = 96; // 1 inch at 96dpi
+    const contentW = pageW - 2 * margin; // 624px
+    const contentH = pageH - 2 * margin; // 864px
+    const canvas = await html2canvas(container, { scale: 2, useCORS: true, backgroundColor: '#ffffff', width: contentW });
     const imgData = canvas.toDataURL('image/png');
-    const imgH = (canvas.height * pageW) / canvas.width;
+    const imgH = (canvas.height * contentW) / canvas.width;
     let yPos = 0;
     let remaining = imgH;
     while (remaining > 0) {
       if (yPos > 0) pdf.addPage();
-      pdf.addImage(imgData, 'PNG', 0, -yPos, pageW, imgH);
-      yPos += pageH;
-      remaining -= pageH;
+      pdf.addImage(imgData, 'PNG', margin, margin - yPos, contentW, imgH);
+      yPos += contentH;
+      remaining -= contentH;
     }
     pdf.save('Two-Palms-Exit-Readiness-Report.pdf');
     container.innerHTML = '';

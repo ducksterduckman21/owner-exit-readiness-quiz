@@ -560,6 +560,28 @@ function _unused_buildReportHTML_REMOVED() {
   </div>`;
 }
 
+async function loadMontserrat(pdf) {
+  try {
+    const [regBuf, boldBuf] = await Promise.all([
+      fetch('https://cdn.jsdelivr.net/gh/JulietaUla/Montserrat@master/fonts/ttf/Montserrat-Regular.ttf').then(r => r.arrayBuffer()),
+      fetch('https://cdn.jsdelivr.net/gh/JulietaUla/Montserrat@master/fonts/ttf/Montserrat-Bold.ttf').then(r => r.arrayBuffer())
+    ]);
+    function toB64(buf) {
+      let b = '', u = new Uint8Array(buf);
+      for (let i = 0; i < u.length; i++) b += String.fromCharCode(u[i]);
+      return btoa(b);
+    }
+    pdf.addFileToVFS('Montserrat-Regular.ttf', toB64(regBuf));
+    pdf.addFont('Montserrat-Regular.ttf', 'Montserrat', 'normal');
+    pdf.addFileToVFS('Montserrat-Bold.ttf', toB64(boldBuf));
+    pdf.addFont('Montserrat-Bold.ttf', 'Montserrat', 'bold');
+    return 'Montserrat';
+  } catch (e) {
+    console.warn('Montserrat font load failed, using Helvetica', e);
+    return 'helvetica';
+  }
+}
+
 async function generateReport() {
   const btn = document.querySelector('.btn-download');
   btn.textContent = 'Generating PDF...';
@@ -575,14 +597,16 @@ async function generateReport() {
     const TEAL = [42, 66, 74], SAGE = [140, 168, 159], GRAY = [51, 51, 51];
     const dateStr = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
+    // Load Montserrat font (falls back to Helvetica if unavailable)
+    const F = await loadMontserrat(pdf);
+
     let y = M;
     function newPage() { pdf.addPage(); y = M; }
     function maybeBreak(need) { if (y + need > PH - M) newPage(); }
 
-    // Draw wrapped text, advance y, return height used
     function drawText(text, x, size, color, bold, maxW, align) {
       pdf.setFontSize(size);
-      pdf.setFont('helvetica', bold ? 'bold' : 'normal');
+      pdf.setFont(F, bold ? 'bold' : 'normal');
       pdf.setTextColor(...color);
       const lines = maxW ? pdf.splitTextToSize(text, maxW) : [text];
       const opts = align ? { align } : undefined;
@@ -593,19 +617,6 @@ async function generateReport() {
     }
 
     const DISC = 'Important Disclosure: Two Palms Planning LLC, doing business as Two Palms Financial, is an investment adviser registered with the State of California. This Exit Readiness Assessment is provided for educational and informational purposes only and is based solely on information provided through the questionnaire, which has not been independently verified. The assessment, including any scores, classifications, observations, or suggested areas of focus, is intended only as a general, directional indicator and does not constitute a business valuation, appraisal, or estimate of potential sale proceeds, nor does it constitute individualized investment, financial planning, legal, tax, accounting, or transaction advice. Results are not a guarantee of business value, exit readiness, transaction success, or any other outcome. Completion of the questionnaire, receipt of this assessment, or participation in a complimentary consultation does not create an investment advisory relationship with Two Palms Financial. Advisory services are provided only pursuant to a separate written agreement, as applicable. Business owners should consult appropriately qualified professionals regarding their individual circumstances before making financial, legal, tax, valuation, or transaction decisions.';
-
-    function drawDisclosure(atY) {
-      pdf.setFontSize(6.5);
-      pdf.setFont('helvetica', 'normal');
-      const lines = pdf.splitTextToSize(DISC, CW - 10);
-      const h = lines.length * 6.5 * 1.35 + 12;
-      pdf.setFillColor(250, 250, 250);
-      pdf.setDrawColor(210, 210, 210);
-      pdf.rect(M, atY, CW, h, 'FD');
-      pdf.setTextColor(130, 130, 130);
-      pdf.text(lines, M + 5, atY + 9);
-      return h;
-    }
 
     // ── PAGE 1: COVER ──────────────────────────────────────────────
     // Logo
@@ -618,42 +629,43 @@ async function generateReport() {
     y += logoH + 16;
 
     drawText('Exit Readiness Assessment', PW / 2, 18, TEAL, true, null, 'center');
-    y += 2;
+    y += 4;
     drawText(dateStr, PW / 2, 8.5, [150, 150, 150], false, null, 'center');
-    y += 20;
+    y += 44; // extra clearance so large score number doesn't overlap the date
 
-    // Score
+    // Score — 54pt baseline at current y; visually occupies ~38pt above baseline
     pdf.setFontSize(54);
-    pdf.setFont('helvetica', 'bold');
+    pdf.setFont(F, 'bold');
     pdf.setTextColor(...TEAL);
     pdf.text(String(overall), PW / 2, y, { align: 'center' });
-    y += 30;
+    y += 54 * 0.35 + 10; // advance past descender space + gap
+
     drawText('out of 100', PW / 2, 8.5, [150, 150, 150], false, null, 'center');
-    y += 12;
+    y += 14;
 
     // Readiness band
     const bandLabel = ready ? 'Exit Ready' : 'Not Yet Ready';
     const bandFill = ready ? [212, 237, 218] : [253, 232, 232];
     const bandTextC = ready ? [26, 92, 42] : [122, 26, 26];
     pdf.setFontSize(9);
-    pdf.setFont('helvetica', 'bold');
+    pdf.setFont(F, 'bold');
     const bw = pdf.getTextWidth(bandLabel) + 24;
     pdf.setFillColor(...bandFill);
     pdf.roundedRect(PW / 2 - bw / 2, y - 10, bw, 17, 4, 4, 'F');
     pdf.setTextColor(...bandTextC);
     pdf.text(bandLabel, PW / 2, y + 3, { align: 'center' });
-    y += 26;
+    y += 28;
 
     // Pillar bars header
     pdf.setFontSize(7.5);
-    pdf.setFont('helvetica', 'bold');
+    pdf.setFont(F, 'bold');
     pdf.setTextColor(...SAGE);
     pdf.text('PILLAR BREAKDOWN', M, y);
     y += 13;
 
     [[PILLAR_NAMES[0], p1pct], [PILLAR_NAMES[1], p2pct], [PILLAR_NAMES[2], p3pct]].forEach(([name, pct]) => {
       pdf.setFontSize(8.5);
-      pdf.setFont('helvetica', 'normal');
+      pdf.setFont(F, 'normal');
       pdf.setTextColor(...TEAL);
       pdf.text(name, M, y);
       pdf.setTextColor(130, 130, 130);
@@ -676,17 +688,18 @@ async function generateReport() {
     pdf.rect(M, y, CW, focusH, 'F');
     pdf.setFillColor(...TEAL);
     pdf.rect(M, y, 3, focusH, 'F');
-    pdf.setFont('helvetica', 'bold');
+    pdf.setFont(F, 'bold');
     pdf.setTextColor(...TEAL);
     pdf.text('FOCUS AREA', M + 10, y + 11);
     pdf.setFontSize(9);
-    pdf.setFont('helvetica', 'normal');
+    pdf.setFont(F, 'normal');
     pdf.setTextColor(...GRAY);
     pdf.text(focusLines, M + 10, y + 11 + 11 * 1.35);
     y += focusH;
 
-    // Pinned disclosure at bottom of page 1
+    // Disclosure pinned to bottom of page 1
     pdf.setFontSize(6.5);
+    pdf.setFont(F, 'normal');
     const disc1Lines = pdf.splitTextToSize(DISC, CW - 10);
     const disc1H = disc1Lines.length * 6.5 * 1.35 + 12;
     const disc1Y = PH - M - disc1H;
@@ -707,7 +720,7 @@ async function generateReport() {
       newPage();
 
       // Pillar heading
-      pdf.setFont('helvetica', 'bold');
+      pdf.setFont(F, 'bold');
       pdf.setFontSize(12);
       pdf.setTextColor(...TEAL);
       pdf.text(group.name, M, y);
@@ -723,31 +736,31 @@ async function generateReport() {
         if (!ans || ans.noPartner) continue;
         const exp = getExplanation(qi, ans);
 
-        // Estimate space needed
         pdf.setFontSize(10);
         const qLines = pdf.splitTextToSize(questions[qi].text, CW);
         pdf.setFontSize(8.5);
+        const ansLine = pdf.splitTextToSize('Your answer:  ' + ans.label, CW);
         const expLines = exp ? pdf.splitTextToSize(exp, CW) : [];
-        const need = qLines.length * 10 * 1.35 + 9 * 1.35 + 8 + expLines.length * 8.5 * 1.35 + 18;
+        const need = qLines.length * 10 * 1.35 + ansLine.length * 9 * 1.35 + 8 + expLines.length * 8.5 * 1.35 + 18;
         maybeBreak(need);
 
         // Question
-        pdf.setFont('helvetica', 'bold');
+        pdf.setFont(F, 'bold');
         pdf.setFontSize(10);
         pdf.setTextColor(...TEAL);
         pdf.text(qLines, M, y);
         y += qLines.length * 10 * 1.35;
 
-        // Answer label
-        pdf.setFont('helvetica', 'bold');
+        // Answer with "Your answer:" prefix
+        pdf.setFont(F, 'normal');
         pdf.setFontSize(9);
         pdf.setTextColor(...SAGE);
-        pdf.text(ans.label, M, y);
-        y += 9 * 1.35 + 6;
+        pdf.text(ansLine, M, y);
+        y += ansLine.length * 9 * 1.35 + 6;
 
         // Explanation
         if (expLines.length) {
-          pdf.setFont('helvetica', 'normal');
+          pdf.setFont(F, 'normal');
           pdf.setFontSize(8.5);
           pdf.setTextColor(...GRAY);
           pdf.text(expLines, M, y);
@@ -759,6 +772,7 @@ async function generateReport() {
     }
 
     // ── LAST PAGE: CTA + DISCLOSURE ───────────────────────────────
+    pdf.setFont(F, 'normal');
     pdf.setFontSize(8.5);
     const cta1 = pdf.splitTextToSize('Book a complimentary consultation: calendly.com/twopalms/consultation', CW - 16);
     const cta2 = pdf.splitTextToSize('Weekly exit planning insights: twopalmsfinancial.com/between-two-palms-newsletter', CW - 16);
@@ -766,18 +780,19 @@ async function generateReport() {
     maybeBreak(ctaH);
     pdf.setFillColor(245, 245, 245);
     pdf.rect(M, y, CW, ctaH, 'F');
-    pdf.setFont('helvetica', 'bold');
+    pdf.setFont(F, 'bold');
     pdf.setFontSize(10);
     pdf.setTextColor(...TEAL);
     pdf.text('Ready to talk?', M + 8, y + 14);
     const ctaBodyY = y + 14 + 10 * 1.35;
-    pdf.setFont('helvetica', 'normal');
+    pdf.setFont(F, 'normal');
     pdf.setFontSize(8.5);
     pdf.setTextColor(...GRAY);
     pdf.text(cta1, M + 8, ctaBodyY);
     pdf.text(cta2, M + 8, ctaBodyY + cta1.length * 8.5 * 1.35 + 6);
     y += ctaH + 18;
 
+    pdf.setFont(F, 'normal');
     pdf.setFontSize(6.5);
     const disc2Lines = pdf.splitTextToSize(DISC, CW - 10);
     const disc2H = disc2Lines.length * 6.5 * 1.35 + 12;

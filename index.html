@@ -709,7 +709,38 @@ async function generateReport() {
     pdf.setTextColor(130, 130, 130);
     pdf.text(disc1Lines, M + 5, disc1Y + 9);
 
-    // ── PAGE 2+: Q&A BREAKDOWN ─────────────────────────────────────
+    // ── PAGE 2: SCORING METHODOLOGY ───────────────────────────────
+    newPage();
+
+    pdf.setFont(F, 'bold');
+    pdf.setFontSize(12);
+    pdf.setTextColor(...TEAL);
+    pdf.text('How Your Score Is Calculated', M, y);
+    y += 5;
+    pdf.setDrawColor(...SAGE);
+    pdf.setLineWidth(1);
+    pdf.line(M, y, M + CW, y);
+    pdf.setLineWidth(0.5);
+    y += 16;
+
+    const methodologyParagraphs = [
+      'This assessment evaluates 15 factors across three pillars of exit readiness: Financial Readiness, Business Composition and Transferable Value, and Life Planning and Psychological Readiness. Each question is scored on a scale of 0 to 5 based on your response, and your total is scaled to a score out of 100.',
+      'The three pillars are not equally weighted in your overall score. Pillar 1 (Financial Readiness) includes 3 questions, Pillar 2 (Business Composition and Transferable Value) includes 8 questions, and Pillar 3 (Life Planning and Psychological Readiness) includes 4 questions. This reflects the relative complexity and breadth of each area, and means that your Pillar 2 score carries the most influence over your overall result. Your pillar percentage scores show how you performed within each pillar relative to its own maximum, which is why they may not directly mirror your overall score. It is also worth noting that your readiness score and your business valuation are two distinct concepts. This assessment measures how prepared you are to pursue and complete a successful exit, not what your business is worth. A high readiness score does not imply a high valuation, and a lower score does not diminish the value you have built.',
+      'A score of 70 or above indicates that you are broadly Exit Ready, meaning your business and personal preparation are at a level where engaging in a serious exit conversation is well-supported. A score below 70 suggests meaningful preparation work remains before pursuing a transaction.',
+      'This report is a starting point, not a finish line. The insights below are designed to give you a clear picture of where you stand today and what to prioritize next.'
+    ];
+
+    for (const para of methodologyParagraphs) {
+      pdf.setFont(F, 'normal');
+      pdf.setFontSize(9.5);
+      pdf.setTextColor(...GRAY);
+      const lines = pdf.splitTextToSize(para, CW);
+      maybeBreak(lines.length * 9.5 * 1.35 + 12);
+      pdf.text(lines, M, y);
+      y += lines.length * 9.5 * 1.35 + 12;
+    }
+
+    // ── PAGE 3+: Q&A BREAKDOWN ─────────────────────────────────────
     const PILLAR_GROUPS = [
       { name: 'Pillar 1: Financial Readiness', indices: [0, 1, 2] },
       { name: 'Pillar 2: Business Composition and Transferable Value', indices: [3, 4, 5, 6, 7, 8, 9, 10] },

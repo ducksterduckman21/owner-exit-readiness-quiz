@@ -156,7 +156,7 @@
       <p id="focus-text"></p>
     </div>
     <div class="cta-block" id="cta-block"></div>
-    <button class="btn-download" onclick="generateReport()">Download Your Full Report</button>
+    <button class="btn-download" onclick="goToReportGate()">Get Your Full Report</button>
     <div class="disclaimer">This assessment is for educational purposes only and does not constitute financial, legal, or investment advice. Results are a directional indicator only.</div>
     <span class="privacy-link" onclick="document.getElementById('privacy-modal').classList.add('open')">Privacy Policy</span>
   </div>
@@ -582,6 +582,13 @@ async function loadMontserrat(pdf) {
   }
 }
 
+function goToReportGate() {
+  try {
+    localStorage.setItem('exitQuizAnswers', JSON.stringify(answers));
+  } catch(e) {}
+  window.location.href = 'https://www.twopalmsfinancial.com/exit-readiness-report';
+}
+
 async function generateReport() {
   const btn = document.querySelector('.btn-download');
   btn.textContent = 'Generating PDF...';
@@ -840,9 +847,25 @@ async function generateReport() {
     console.error('PDF error:', err);
     alert('PDF generation failed. Please try again or contact support.');
   }
-  btn.textContent = 'Download Your Full Report';
+  btn.textContent = 'Get Your Full Report';
   btn.disabled = false;
 }
+
+// After returning from the Squarespace lead capture page, auto-generate the report
+(function() {
+  if (new URLSearchParams(window.location.search).get('download') !== 'true') return;
+  try {
+    const saved = localStorage.getItem('exitQuizAnswers');
+    if (!saved) return;
+    const savedAnswers = JSON.parse(saved);
+    if (!Array.isArray(savedAnswers) || savedAnswers.length !== answers.length) return;
+    savedAnswers.forEach((a, i) => { answers[i] = a; });
+    localStorage.removeItem('exitQuizAnswers');
+    // Show results screen first, then trigger report
+    showResults();
+    setTimeout(() => generateReport(), 300);
+  } catch(e) {}
+})();
 </script>
 </body>
 </html>

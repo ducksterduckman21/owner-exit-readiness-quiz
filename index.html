@@ -165,9 +165,11 @@
 <div id="privacy-modal">
   <div class="privacy-content">
     <h2>Privacy Policy</h2>
-    <p><strong>What we collect.</strong> Nothing. This assessment collects no personal information. All questions are answered and scored locally in your browser. No responses, scores, or identifying information are transmitted to Two Palms Financial or to any third party. Your report is generated on your own device.</p>
+    <p><strong>What we collect.</strong> This assessment does not collect your name, email address, or any answers you provide. All scoring happens in your browser — your responses and results are never sent to Two Palms Financial's servers. Your report is generated and downloaded directly on your device.</p>
+    <p><strong>Report access.</strong> To access your full report, you will be directed to a brief form on our website to provide your name and email address. That information is collected under our standard privacy practices.</p>
     <p><strong>Cookies.</strong> This page sets no cookies and uses no tracking technologies.</p>
-    <p><strong>Links.</strong> This page contains links to Calendly and to the Two Palms Financial newsletter. Clicking those links takes you to third-party sites governed by their own privacy policies. No assessment data is passed to those links.</p>
+    <p><strong>Third-party resources.</strong> Like most websites, this page loads fonts and a PDF library from third-party content delivery networks. Those providers may log your IP address as part of standard CDN operation. No assessment data is included in those requests.</p>
+    <p><strong>Links.</strong> Clicking the scheduling or newsletter links takes you to third-party sites with their own privacy policies. No assessment data is passed to those links.</p>
     <p><strong>Contact.</strong> Daniel Costigan, Chief Compliance Officer. (314) 341-1284</p>
     <button class="btn-close-modal" onclick="document.getElementById('privacy-modal').classList.remove('open')">Close</button>
   </div>
@@ -853,7 +855,10 @@ async function generateReport() {
 
 // After returning from the Squarespace lead capture page, auto-generate the report
 (function() {
-  if (new URLSearchParams(window.location.search).get('download') !== 'true') return;
+  if (new URLSearchParams(window.location.search).get('download') !== 'true') {
+    try { localStorage.removeItem('exitQuizAnswers'); } catch(e) {}
+    return;
+  }
   try {
     const saved = localStorage.getItem('exitQuizAnswers');
     if (!saved) return;
